@@ -19,7 +19,6 @@ export default auth((req) => {
     if (!isLoggedIn && isAdminRoutes) {
         return Response.redirect(new URL('/login', nextUrl))
     }
-
 })
 
 export const config = {
