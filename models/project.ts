@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema(
+type IProject = {
+    title: string,
+    description: string,
+    image: string,
+    skills: string
+}
+
+const ProjectSchema = new mongoose.Schema<IProject>(
     {
         title: { type: String, required: true },
         description: { type: String, required: true },
