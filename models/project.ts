@@ -1,13 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-type IProject = {
+export interface IProject extends Document {
     title: string,
     description: string,
     image: string,
     skills: string
 }
 
-const ProjectSchema = new mongoose.Schema<IProject>(
+export type ProjectModel = Model<IProject>
+
+const ProjectSchema = new mongoose.Schema<IProject, ProjectModel>(
     {
         title: { type: String, required: true },
         description: { type: String, required: true },
@@ -16,4 +18,4 @@ const ProjectSchema = new mongoose.Schema<IProject>(
     }
 )
 
-export const Project = mongoose.models?.Project || mongoose.model('Project', ProjectSchema)
+export const Project: ProjectModel = mongoose.models?.Project || mongoose.model<IProject, ProjectModel>('Project', ProjectSchema)

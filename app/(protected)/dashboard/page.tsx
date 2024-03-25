@@ -1,25 +1,25 @@
-import { Project } from '@/models/project'
+import { IProject, Project } from '@/models/project'
 import { connect } from '@/utils/connect'
 import Image from 'next/image'
 import React from 'react'
 
-type IProject = {
-    title: string,
-    description: string,
-    image: string,
-    skills: string,
-    _id: string
-}
+// type IProject = {
+//     title: string,
+//     description: string,
+//     image: string,
+//     skills: string,
+//     _id: string
+// }
 
 const getProject = async () => {
     await connect()
 
-    const projectData = await Project.find()
+    const projectData: Array<IProject> = await Project.find()
     return projectData
 }
 
 export default async function Dashboard() {
-    const projects: IProject[] = await getProject()
+    const projects = await getProject()
 
     return (
         <div>
