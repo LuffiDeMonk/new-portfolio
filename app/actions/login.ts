@@ -11,6 +11,10 @@ export const login = async (prev: any, values: z.infer<typeof LoginFormSchema>) 
     const { email, password } = values
     try {
         await signIn('credentials', { email, password, redirectTo: DEFAULT_LOGIN_REDIRECT })
+        return {
+            type: 'success',
+            message: 'logged in successfully'
+        }
     } catch (error: any) {
         if (error instanceof AuthError) {
             switch (error.type) {
@@ -18,6 +22,11 @@ export const login = async (prev: any, values: z.infer<typeof LoginFormSchema>) 
                     return {
                         type: 'error',
                         message: 'Invalid Credentials'
+                    }
+                default:
+                    return {
+                        type: 'error',
+                        message: 'An unknown error occured'
                     }
             }
         }

@@ -11,20 +11,23 @@ export const addExperience = async (prev: any, data: z.infer<typeof ExperienceFo
         const validatedFields = ExperienceFormValidation.safeParse(data)
         if (!validatedFields.success) {
             return {
-                message: 'Invalid form inputs'
+                message: 'Invalid form inputs',
+                type: 'error'
             }
         }
         const { companyName, title, description, from, to } = validatedFields.data
 
         await Experience.create({ companyName, title, description, from, to })
         return {
-            message: 'Experience added successfully'
+            message: 'Experience added successfully',
+            type: 'success'
         }
 
     } catch (error) {
         console.log(error)
         return {
-            message: 'An unknown error occured'
+            message: 'An unknown error occured',
+            type: 'success'
         }
     }
 }

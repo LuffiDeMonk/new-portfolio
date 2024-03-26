@@ -38,7 +38,6 @@ export default function ProjectForm() {
         newData.append('image', data.image[0])
 
         await formAction(newData)
-        console.log(data)
     }
 
 

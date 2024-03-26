@@ -1,13 +1,13 @@
-import { signOut } from "@/auth";
-import Container from "@/components/home/Container";
-import Navbar from "@/components/home/Navbar";
-import { Button } from "@/components/ui/button";
+import About from "@/components/home/About";
+import Banner from "@/components/home/Banner";
+import Counter from "@/components/home/Counter";
 
 export default function Home() {
   return (
-    <>
-      {/* <Container /> */}
-
-    </>
+    <div>
+      <Banner />
+      <About />
+      <Counter />
+    </div>
   );
 }

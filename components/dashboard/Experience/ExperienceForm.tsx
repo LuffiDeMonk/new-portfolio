@@ -2,18 +2,25 @@
 
 import { addExperience } from '@/app/(protected)/dashboard/experience/action'
 import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Textarea } from '@/components/ui/textarea'
+import useToastNotification from '@/helpers/customhooks/useToastNotification'
+import { format } from "date-fns"
 import { ExperienceFormValidation } from '@/validation/ExperienceFormValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useTransition } from 'react'
+import { CalendarIcon } from 'lucide-react'
+import React, { useEffect, useTransition } from 'react'
 import { useFormState } from 'react-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { cn } from '@/lib/utils'
 
 const initialState = {
-    message: ''
+    message: '',
+    type: ''
 }
 
 export default function ExperienceForm() {
@@ -22,13 +29,25 @@ export default function ExperienceForm() {
     const form = useForm<z.infer<typeof ExperienceFormValidation>>(
         {
             resolver: zodResolver(ExperienceFormValidation),
+            defaultValues: {
+                companyName: '',
+                description: '',
+                title: '',
+                from: undefined,
+                to: undefined
+            }
         }
     )
     const onSubmit: SubmitHandler<z.infer<typeof ExperienceFormValidation>> = (data) => {
         startTransition(() => {
             formAction(data)
+            form.reset()
         })
     }
+
+    // changing toast state based on server action state
+    useToastNotification(state)
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -62,7 +81,7 @@ export default function ExperienceForm() {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <Textarea placeholder='Enter Your Role' {...field} className='h-64' />
+                                <Textarea placeholder='Describe your role in the organization' {...field} className='h-64' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -72,12 +91,26 @@ export default function ExperienceForm() {
                     <div className="flex-grow">
                         <FormField
                             control={form.control}
-                            name='from'
+                            name="from"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input placeholder='Started from ' {...field} />
-                                    </FormControl>
+                                <FormItem className="flex flex-col">
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <FormControl>
+                                                <Button variant={"outline"} className={cn(`${field.value ? "text-black" : "text-gray-400"}`)}>
+                                                    {!field.value ? "Select your joining date" : format(field.value, 'PPP')}
+                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                </Button>
+                                            </FormControl>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                mode="single"
+                                                selected={field.value}
+                                                onSelect={field.onChange}
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -86,12 +119,26 @@ export default function ExperienceForm() {
                     <div className="flex-grow">
                         <FormField
                             control={form.control}
-                            name='to'
+                            name="to"
                             render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input placeholder='Ended at' {...field} />
-                                    </FormControl>
+                                <FormItem className="flex flex-col">
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <FormControl>
+                                                <Button variant={"outline"} className={cn(`${field.value ? "text-black" : "text-gray-400"}`)}>
+                                                    {!field.value ? "Select your ending date" : format(field.value, 'PPP')}
+                                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                                </Button>
+                                            </FormControl>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-auto p-0" align="start">
+                                            <Calendar
+                                                mode="single"
+                                                selected={field.value}
+                                                onSelect={field.onChange}
+                                            />
+                                        </PopoverContent>
+                                    </Popover>
                                     <FormMessage />
                                 </FormItem>
                             )}
