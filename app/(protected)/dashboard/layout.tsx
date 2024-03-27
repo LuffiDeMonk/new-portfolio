@@ -9,7 +9,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <Container>
                 {children}
             </Container>
-            <Toaster richColors position='top-right' closeButton />
         </div>
     )
 }

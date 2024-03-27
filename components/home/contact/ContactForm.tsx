@@ -1,16 +1,26 @@
 'use client'
 
+import { sendEmail } from '@/app/action'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import useToastNotification from '@/helpers/customhooks/useToastNotification'
 import { ContactFormValidation } from '@/validation/ContactFormValiation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import React, { useTransition } from 'react'
+import { useFormState } from 'react-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+const initialState = {
+    type: '',
+    message: ''
+}
+
 export default function ContactForm() {
+    const [state, formAction] = useFormState(sendEmail, initialState)
+    const [isPending, startTransition] = useTransition()
     const form = useForm<z.infer<typeof ContactFormValidation>>({
         resolver: zodResolver(ContactFormValidation),
         defaultValues: {
@@ -21,8 +31,13 @@ export default function ContactForm() {
         }
     })
     const onSubmit: SubmitHandler<z.infer<typeof ContactFormValidation>> = (data) => {
-        console.log(data)
+        startTransition(() => {
+            formAction(data)
+        })
     }
+
+    useToastNotification(state)
+
     return (
         <div className='col-span-4 space-y-5'>
             <Form {...form}>
@@ -81,7 +96,7 @@ export default function ContactForm() {
                             </FormItem>
                         )}
                     />
-                    <Button className='p-6 border border-blue-600 text-blue-600 bg-transparent rounded-none hover:bg-blue-600 hover:text-white hover:border-transparent transition-colors duration-500'>Send Message</Button>
+                    <Button className='p-6 border border-blue-600 text-blue-600 bg-transparent rounded-none hover:bg-blue-600 hover:text-white hover:border-transparent transition-colors duration-500'>{isPending ? 'Sending...' : 'Send Message'}</Button>
                 </form>
             </Form>
         </div>
