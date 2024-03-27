@@ -7,6 +7,9 @@ import React, { useState } from 'react'
 import { Facebook, Github, Linkedin } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Container from './Container'
+import Link from 'next/link'
+import { Links } from '@/constants/HomeNavlink'
+import MobileNavigation from './MobileNavigation'
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -49,18 +52,21 @@ export default function Navbar() {
             transition={{
                 duration: 0.1
             }}
-            className={cn("fixed top-0 left-0 z-[999] w-full", `${!bg ? 'bg-transparent' : 'bg-white shadow-lg'}`)}>
+            className={cn("fixed top-0 left-0 z-40 w-full", `${!bg ? 'bg-transparent' : 'bg-white shadow-lg'}`)}>
             <Container className="max-w-6xl mx-auto flex items-center justify-between gap-4 h-20">
-                <div className="text-xl font-bold w-1/3 shrink-0 relative h-full">
-                    <Image src="/logo.png" alt='banner' fill />
-                </div>
+                <Link href='/' className="focus-visible:outline-none focus-visible:ring-tranparent text-xl font-bold w-fit lg:w-1/3 shrink-0 relative h-full">
+                    <Image src="/logo.png" alt='banner' width={500} height={300} className='w-32 h-20 object-cover' />
+                </Link>
                 <div className="hidden lg:flex items-center justify-center gap-8 w-1/3 shrink-0">
-                    <p>Home</p>
-                    <p>About</p>
-                    <p>Projects</p>
-                    <p>Contact</p>
+                    {
+                        Links.map(item => (
+                            <React.Fragment key={item.id}>
+                                <Link className={cn("focus-visible:outline-none focus-visible:ring-transparent relative", `${item.link === pathname ? "before:absolute before:content-[''] before:w-full before:h-0.5 before:rounded-l-full before:rounded-r-full before:bg-red-500 before:-bottom-1 before:left-1/2 before:-translate-x-1/2" : "hover:after:absolute hover:after:content-[''] after:w-full after:transition after:duration-500 after:origin-right after:scale-x-0 hover:after:scale-x-100  hover:after:h-0.5 hover:after:rounded-l-full hover:after:rounded-r-full hover:after:bg-red-500 hover:after:-bottom-1 after:left-1/2 hover:after:-translate-x-1/2"}`)} href={item.link}>{item.name}</Link>
+                            </React.Fragment>
+                        ))
+                    }
                 </div>
-                <div className="hidden lg:flex items-center justify-center gap-4 w-1/3 shrink-0">
+                <div className="hidden lg:flex items-center justify-end gap-4 w-1/3 shrink-0">
                     <div className='rounded-full border border-black p-1.5 flex items-center justify-center'>
                         <Facebook size={18} />
                     </div>
@@ -71,6 +77,7 @@ export default function Navbar() {
                         <Linkedin size={18} />
                     </div>
                 </div>
+                <MobileNavigation />
             </Container>
         </motion.nav>
     )

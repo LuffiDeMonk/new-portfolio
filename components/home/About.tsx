@@ -22,7 +22,7 @@ export default function About() {
             </div>
             {/* hero image */}
             <div className='w-full lg:basis-1/2 h-96 sm:h-[28rem] lg:h-[32rem] relative'>
-                <Image src='/about.png.webp' fill alt='about' />
+                <Image src='/about.png.webp' width={300} height={300} alt='about' className='w-full h-full object-cover' />
             </div>
         </Container>
     )

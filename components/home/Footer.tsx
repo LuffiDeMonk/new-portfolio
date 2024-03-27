@@ -3,6 +3,8 @@ import Container from './Container'
 import { Button } from '../ui/button'
 import { Facebook, Github, Linkedin } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import { Links } from '@/constants/HomeNavlink'
+import Link from 'next/link'
 
 
 export default function Footer() {
@@ -18,9 +20,12 @@ export default function Footer() {
                 <div className="space-y-12">
                     <div className="flex items-center justify-center lg:justify-between">
                         <div className="hidden lg:flex items-center gap-12">
-                            <p className='text-sm cursor-pointer hover:text-purple-600 duration-300'>About</p>
-                            <p className='text-sm cursor-pointer hover:text-purple-600 duration-300'>Services</p>
-                            <p className='text-sm cursor-pointer hover:text-purple-600 duration-300'>Portfolio</p>
+                            {
+                                Links.slice(1, 4).map(item => (
+                                    <Link key={item.id} href={item.link} className='text-sm cursor-pointer hover:text-purple-600 duration-300'>{item.name}</Link>
+                                ))
+                            }
+
                         </div>
                         <div className="flex items-center justify-center gap-6">
                             <div className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>

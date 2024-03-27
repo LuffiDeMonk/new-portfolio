@@ -8,6 +8,8 @@ type HeadingProps = {
 
 export default function Heading({ title, className }: HeadingProps) {
     return (
-        <h1 className={cn("text-3xl font-semibold", className)}>{title}</h1>
+        <h1 className={cn("text-3xl font-semibold", className)}>
+            {title}
+        </h1>
     )
 }
