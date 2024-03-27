@@ -7,8 +7,8 @@ import Image from 'next/image'
 export default function About() {
     return (
         <Container className='lg:h-[120vh] relative flex flex-col lg:flex-row items-center justify-center gap-5 mt-12 xl:mt-32'>
-            <div className="hidden xl:block absolute top-0 right-2 size-80">
-                <Image fill alt="dots" src="/dots.png" />
+            <div className="hidden xl:block absolute top-0 right-6 size-80">
+                <Image width={500} height={500} alt="dots" src="/dots.png" className='object-cover w-full h-full' />
             </div>
 
             <div

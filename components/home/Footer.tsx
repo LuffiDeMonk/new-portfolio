@@ -15,7 +15,9 @@ export default function Footer() {
                     <h2 className='text-4xl xl:text-5xl text-center font-[800]'>Let&rsquo;s discuss for a project</h2>
                     <p className='text-sm text-center leading-loose'>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor <br />
                         incididunt ut labore et dolore magna aliqua.</p>
-                    <Button className='px-9 py-7 rounded-none border border-transparent duration-500 bg-sky-400 hover:text-sky-400 hover:bg-black/15 hover:border-sky-400'>Start talking</Button>
+                    <Link href='/contact'>
+                        <Button className='px-9 py-7 rounded-none border border-transparent duration-500 bg-sky-400 hover:text-sky-400 hover:bg-black/15 hover:border-sky-400'>Start talking</Button>
+                    </Link>
                 </div>
                 <div className="space-y-12">
                     <div className="flex items-center justify-center lg:justify-between">
