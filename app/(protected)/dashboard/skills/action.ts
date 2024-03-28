@@ -29,7 +29,7 @@ export const addSkill = async (prev: any, data: FormData) => {
             title,
             image: url
         })
-        revalidateTag('skill')
+        revalidateTag('skills')
         return {
             type: 'success',
             message: 'Data fetched successfully'
