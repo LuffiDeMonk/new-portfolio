@@ -62,7 +62,7 @@ export default function ProjectForm() {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <Textarea {...field} placeholder='Enter your project description' className='h-56' />
+                                <Textarea {...field} placeholder='Enter your project description' className='h-32' />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -86,12 +86,37 @@ export default function ProjectForm() {
                 />
                 <FormField
                     control={form.control}
+                    name='liveDemo'
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input {...field} placeholder='Enter live link of the project' />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name='repo'
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input {...field} placeholder='Enter github link of the project' />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
                     name='skills'
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
                                 <Input {...field} placeholder='Technologies used in the project' />
                             </FormControl>
+                            <FormMessage />
                         </FormItem>
                     )}
                 />

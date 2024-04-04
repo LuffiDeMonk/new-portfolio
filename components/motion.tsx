@@ -1,4 +1,5 @@
 'use client'
+import { motion, AnimatePresence } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
 
 const SkillMarqueeContainer = ({ children }: { children: React.ReactNode }) => {
@@ -11,3 +12,6 @@ const SkillMarqueeContainer = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default SkillMarqueeContainer
+
+export const MotionDiv = motion.div
+export const AnimationWrapper = AnimatePresence

@@ -8,6 +8,7 @@ export const ProjectFormValidation = z.object({
     skills: z.string().min(1, 'This is a required field'),
     image: z.any()
         .refine(files => files.length !== 0, "This is a required field")
-        .refine(file => ACCEPTED_IMAGE_TYPES.includes(file?.[0]?.type), "Unsupported file format")
-
+        .refine(file => ACCEPTED_IMAGE_TYPES.includes(file?.[0]?.type), "Unsupported file format"),
+    liveDemo: z.string().min(1, 'This is a required field'),
+    repo: z.string().min(1, 'This is a required field'),
 })

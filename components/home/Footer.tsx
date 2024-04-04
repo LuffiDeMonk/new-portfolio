@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export default function Footer() {
     return (
-        <footer className='h-screen mt-32 bg-[#001D38] relative'>
+        <footer className='h-screen bg-[#001D38] relative'>
             <Container className='h-full flex flex-col justify-around text-white'>
                 <div className="flex flex-col items-center justify-center gap-6">
                     <h2 className='text-4xl xl:text-5xl text-center font-[800]'>Let&rsquo;s discuss for a project</h2>
