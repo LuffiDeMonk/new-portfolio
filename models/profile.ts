@@ -1,6 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const ProfileSchema = new mongoose.Schema({
+
+export interface IProfile extends Document {
+    firstName: string,
+    lastName: string,
+    description: string,
+    email: string,
+    phone: string,
+    github: string,
+    linkedin: string
+}
+
+export type ProfileModel = Model<IProfile>
+
+const ProfileSchema = new mongoose.Schema<IProfile, ProfileModel>({
     firstName: {
         type: String,
         required: true
@@ -30,4 +43,4 @@ const ProfileSchema = new mongoose.Schema({
     }
 })
 
-export const Profile = mongoose.models?.Profile || mongoose.model("Profile", ProfileSchema)
+export const Profile = mongoose.models?.Profile || mongoose.model<IProfile, ProfileModel>("Profile", ProfileSchema)

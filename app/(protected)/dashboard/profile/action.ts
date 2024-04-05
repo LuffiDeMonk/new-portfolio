@@ -11,20 +11,25 @@ export const addProfile = async (prev: any, data: z.infer<typeof ProfileFormVali
         const validatedFields = ProfileFormValidation.safeParse(data)
         if (!validatedFields.success) {
             return {
-                message: 'Invalid form details'
+                message: 'Invalid form details',
+                type: 'error'
             }
         }
         const { description, email, firstName, github, lastName, linkedin, phone } = validatedFields.data
 
-        const submittingForm = await Profile.create({ firstName, lastName, description, email, phone, github, linkedin })
-        if (submittingForm instanceof Profile) {
-            return {
-                message: 'Profile data added successfully'
-            }
+        await Profile.create({ firstName, lastName, description, email, phone, github, linkedin })
+
+        return {
+            message: "Profile data added successfully",
+            type: 'success'
         }
 
     } catch (error) {
         console.log(error)
+        return {
+            message: 'An unknown error occured',
+            type: 'error'
+        }
     }
     console.log(data)
 }

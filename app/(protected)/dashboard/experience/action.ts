@@ -27,7 +27,7 @@ export const addExperience = async (prev: any, data: z.infer<typeof ExperienceFo
         console.log(error)
         return {
             message: 'An unknown error occured',
-            type: 'success'
+            type: 'error'
         }
     }
 }

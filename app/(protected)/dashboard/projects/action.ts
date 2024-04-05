@@ -5,11 +5,10 @@ import { Project } from "@/models/project"
 import { connect } from "@/utils/connect"
 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
-import { v4 } from "uuid"
 
 export const addProject = async (prev: any, data: FormData) => {
     const newData = Object.fromEntries(data)
-    const { title, description, skills } = newData
+    const { title, description, skills, repo, liveDemo } = newData
     const image = data.get('image') as File
 
     let imageUrl = ''
@@ -32,13 +31,20 @@ export const addProject = async (prev: any, data: FormData) => {
             title,
             description,
             skills,
-            image: imageUrl
+            image: imageUrl,
+            repo,
+            liveDemo
         })
+        return {
+            type: 'success',
+            message: "Project added successfully"
+        }
     } catch (error) {
         console.log(error)
+        return {
+            type: 'error',
+            message: 'An unknown error occured'
+        }
     }
 
-    return {
-
-    }
 }

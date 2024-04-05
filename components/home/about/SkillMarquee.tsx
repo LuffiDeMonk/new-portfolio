@@ -16,7 +16,7 @@ export default async function SkillMarquee() {
                     {
                         data?.map((item) => (
                             <div className='relative size-20 mx-4' key={item._id.toString()}>
-                                <img src={item.image} alt={item.title} className='w-56 h-full' />
+                                <Image width={300} height={100} src={item.image} alt={item.title} className='w-full grayscale h-full' />
                             </div>
                         ))
                     }

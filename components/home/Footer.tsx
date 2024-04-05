@@ -1,13 +1,15 @@
 import React from 'react'
 import Container from './Container'
 import { Button } from '../ui/button'
-import { Facebook, Github, Linkedin } from 'lucide-react'
+import { Facebook, Github, Linkedin, Mail } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { Links } from '@/constants/HomeNavlink'
 import Link from 'next/link'
+import { getProfile } from '@/helpers/data/fetchProfile'
 
 
-export default function Footer() {
+export default async function Footer() {
+    const profileData = await getProfile()
     return (
         <footer className='h-screen bg-[#001D38] relative'>
             <Container className='h-full flex flex-col justify-around text-white'>
@@ -30,15 +32,15 @@ export default function Footer() {
 
                         </div>
                         <div className="flex items-center justify-center gap-6">
-                            <div className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
-                                <Facebook size={17} fill='white' />
-                            </div>
-                            <div className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
+                            <Link target='_blank' media='email' href={`mailto:${profileData?.[0]?.email}`} passHref className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
+                                <Mail size={17} />
+                            </Link>
+                            <Link target='_blank' href={profileData?.[0]?.github!} className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
                                 <Github size={17} fill='white' />
-                            </div>
-                            <div className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
+                            </Link>
+                            <Link target='_blank' href={`https://${profileData?.[0]?.linkedin}`} className='rounded-full border border-black p-3 hover:bg-purple-400 hover:border-transparent cursor-pointer transition-colors duration-500 flex items-center justify-center'>
                                 <Linkedin size={17} fill='white' />
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <Separator className='bg-stone-500' />

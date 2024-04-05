@@ -48,7 +48,7 @@ export default function ContactForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Textarea {...field} placeholder="Enter your message" className="h-56 w-full" />
+                                    <Textarea {...field} placeholder="Enter your message" className="h-56 resize-none w-full" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
