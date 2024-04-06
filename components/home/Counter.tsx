@@ -2,12 +2,22 @@
 import React from 'react'
 import Container from './Container'
 import CountUp from 'react-countup'
+import { MotionDiv } from '../motion'
+import { cardVariants } from '@/constants/animation/marquee'
 
 export default function Counter() {
     return (
         <Container className='flex flex-col md:flex-row items-center justify-center gap-10 mt-12 pb-32 md:mt-0'>
             {Array(3).fill(1).map((_, idx) => (
-                <div key={idx} className="w-full min-h-56 md:w-1/3  flex flex-col gap-3 items-center justify-center border border-gray-100 hover:border-blue-500 transition-colors duration-500">
+                <MotionDiv
+                    variants={cardVariants}
+                    initial='initial'
+                    whileInView='whileInView'
+                    custom={idx}
+                    viewport={{ once: true }}
+                    key={idx}
+                    className="w-full min-h-56 md:w-1/3  flex flex-col gap-3 items-center justify-center border border-gray-100 hover:border-blue-500 transition-colors duration-500"
+                >
                     <CountUp
                         className='text-6xl font-semibold text-purple-400'
                         start={0}
@@ -15,7 +25,7 @@ export default function Counter() {
                         duration={10}
                     />
                     <p className='text-base'>Total Projects</p>
-                </div>
+                </MotionDiv>
             ))}
         </Container>
     )

@@ -7,6 +7,8 @@ import { Links } from '@/constants/HomeNavlink'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
+import { MotionDiv } from '../motion'
+import { cardVariants, variants } from '@/constants/animation/marquee'
 
 export default function MobileNavigation() {
     const pathname = usePathname()
@@ -20,10 +22,10 @@ export default function MobileNavigation() {
                 </SheetTrigger>
                 <SheetContent>
                     <div className="my-12 h-full flex flex-col gap-8">
-                        {Links.map(item => (
-                            <React.Fragment key={item.id}>
+                        {Links.map((item, idx) => (
+                            <MotionDiv initial='initial' whileInView='whileInView' variants={cardVariants} custom={idx} key={item.id}>
                                 <Link href={item.link} className={cn("text-xl pl-6 relative ", `${pathname === item.link ? "before:absolute before:top-0 before:left-0 before:content-[''] before:h-full before:w-1 before:bg-red-300" : ""}`)}>{item.name}</Link>
-                            </React.Fragment>
+                            </MotionDiv>
                         ))}
                     </div>
                 </SheetContent>

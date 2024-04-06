@@ -10,8 +10,8 @@ export default async function ProjectContainer() {
     return (
         <Container className='my-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
             {
-                data?.map((item) => (
-                    <ProjectCard data={item} key={item._id} />
+                data?.map((item, idx) => (
+                    <ProjectCard data={item} custom={idx} key={item._id} />
                 ))
             }
         </Container>
