@@ -10,8 +10,8 @@ export default async function SkillMarquee() {
     const data: Array<ISkill> | undefined = await FetchSkills()
     return (
         <>
-            <Container className='px-0 my-20 space-y-6 h-48 relative overflow-hidden'>
-
+            <Container className='px-0 my-20 space-y-2 h-60 relative overflow-hidden'>
+                <h1 className='text-5xl font-bold text-center'>Skills</h1>
                 <SkillMarqueeContainer>
                     {
                         data?.map((item) => (
