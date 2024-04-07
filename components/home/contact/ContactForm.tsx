@@ -1,10 +1,12 @@
 'use client'
 
 import { sendEmail } from '@/app/action'
+import { MotionDiv } from '@/components/motion'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { variants } from '@/constants/animation/marquee'
 import useToastNotification from '@/helpers/customhooks/useToastNotification'
 import { ContactFormValidation } from '@/validation/ContactFormValiation'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,7 +41,7 @@ export default function ContactForm() {
     useToastNotification(state)
 
     return (
-        <div className='col-span-4 space-y-5'>
+        <MotionDiv variants={variants} className='col-span-4 space-y-5'>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 w-full'>
                     <FormField
@@ -99,6 +101,6 @@ export default function ContactForm() {
                     <Button className='p-6 border border-blue-600 text-blue-600 bg-transparent rounded-none hover:bg-blue-600 hover:text-white hover:border-transparent transition-colors duration-500'>{isPending ? 'Sending...' : 'Send Message'}</Button>
                 </form>
             </Form>
-        </div>
+        </MotionDiv>
     )
 }

@@ -5,41 +5,16 @@ import { Button } from '../ui/button'
 import Image from 'next/image'
 import { getProfile } from '@/helpers/data/fetchProfile'
 import { MotionDiv } from '../motion'
+import { AboutVariants, AboutVariants2 } from '@/constants/animation/marquee'
 
-const AboutVariants = {
-    initial: {
-        opacity: 0,
-        x: 80
-    },
-    whileInView: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: 1
-        }
-    }
-}
 
-const AboutVariants2 = {
-    initial: {
-        opacity: 0,
-        y: 80
-    },
-    whileInView: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 1
-        }
-    }
-}
 
 export default async function About() {
     const profile = await getProfile()
     return (
         <Container className='lg:h-[120vh] relative flex flex-col lg:flex-row items-center justify-center gap-5 mt-12 xl:mt-32 overflow-hidden'>
             <div className="hidden xl:block absolute top-0 right-6 size-80">
-                <MotionDiv variants={AboutVariants} initial='initial' whileInView='whileInView'>
+                <MotionDiv variants={AboutVariants} initial='initial' whileInView='whileInView' viewport={{ once: true }}>
                     <Image width={500} height={500} alt="dots" src="/dots.png" className='object-cover w-full h-full' />
                 </MotionDiv>
             </div>
@@ -49,6 +24,7 @@ export default async function About() {
                     variants={AboutVariants}
                     initial='initial'
                     whileInView='whileInView'
+                    viewport={{ once: true }}
                 >
                     <p className='text-[18rem] font-extrabold text-gray-100'>About</p>
                 </MotionDiv>
@@ -77,6 +53,7 @@ export default async function About() {
                 initial={{ opacity: 0, x: 80 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
+                viewport={{ once: true }}
                 className='w-full lg:basis-1/2 h-96 sm:h-[28rem] lg:h-[32rem] relative'>
                 <Image src='/about.png.webp' width={300} height={300} alt='about' className='w-full h-full object-cover' />
             </MotionDiv>
