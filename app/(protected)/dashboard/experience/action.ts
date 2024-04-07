@@ -3,6 +3,7 @@
 import { Experience } from "@/models/experience"
 import { connect } from "@/utils/connect"
 import { ExperienceFormValidation } from "@/validation/ExperienceFormValidation"
+import { revalidateTag } from "next/cache"
 import { z } from "zod"
 
 export const addExperience = async (prev: any, data: z.infer<typeof ExperienceFormValidation>) => {
@@ -18,6 +19,7 @@ export const addExperience = async (prev: any, data: z.infer<typeof ExperienceFo
         const { companyName, title, description, from, to } = validatedFields.data
 
         await Experience.create({ companyName, title, description, from, to })
+        revalidateTag('experience')
         return {
             message: 'Experience added successfully',
             type: 'success'

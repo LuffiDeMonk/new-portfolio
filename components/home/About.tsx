@@ -54,8 +54,8 @@ export default async function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
                 viewport={{ once: true }}
-                className='w-full lg:basis-1/2 h-96 sm:h-[28rem] lg:h-[32rem] relative'>
-                <Image src='/about.png.webp' width={300} height={300} alt='about' className='w-full h-full object-cover' />
+                className='w-full lg:basis-1/2 h-96 sm:h-[28rem] lg:h-[32rem] bg-gradient-to-r from-blue-500 to-purple-500 relative'>
+                <Image src='/portfolio.png' width={300} height={300} alt='about' className='w-full h-full object-cover' />
             </MotionDiv>
         </Container>
     )

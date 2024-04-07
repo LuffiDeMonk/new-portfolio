@@ -1,6 +1,16 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 
-const ExperienceSchema = new mongoose.Schema({
+export interface IExperience extends Document {
+    title: string,
+    companyName: string,
+    description: string,
+    from: string,
+    to: string,
+}
+
+export type ExperienceModel = Model<IExperience>
+
+const ExperienceSchema = new mongoose.Schema<IExperience, ExperienceModel>({
     title: {
         type: String,
         required: true
@@ -24,4 +34,4 @@ const ExperienceSchema = new mongoose.Schema({
 })
 
 
-export const Experience = mongoose.models?.Experience || mongoose.model('Experience', ExperienceSchema)
+export const Experience = mongoose.models?.Experience || mongoose.model<IExperience, ExperienceModel>('Experience', ExperienceSchema)

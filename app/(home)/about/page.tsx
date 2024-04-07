@@ -4,15 +4,23 @@ import React from 'react'
 import Services from '@/components/home/Services'
 import Counter from '@/components/home/Counter'
 import SkillMarquee from '@/components/home/about/SkillMarquee'
+import { getGithubData } from '@/helpers/data/fetchGithubData'
+import Timeline from '@/components/home/Education'
 
-export default function About() {
+export default async function About() {
+    const githubdata = await getGithubData()
     return (
         <>
             <NavBanner />
             <Services />
             <Description />
             <SkillMarquee />
-            <Counter />
+            <Timeline />
+            <Counter
+                public_repos={githubdata.public_repos}
+                followers={githubdata.followers}
+                following={githubdata.following}
+            />
         </>
     )
 }
