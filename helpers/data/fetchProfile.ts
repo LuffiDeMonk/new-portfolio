@@ -1,7 +1,8 @@
 import { IProfile, Profile } from "@/models/profile";
 import { connect } from "@/utils/connect";
+import { unstable_cache } from "next/cache";
 
-export const getProfile = async () => {
+export const getProfile = unstable_cache(async () => {
     try {
         await connect()
         const profileInfo = await Profile.find({})
@@ -9,5 +10,10 @@ export const getProfile = async () => {
     } catch (error) {
         console.log(error)
     }
-}
+},
+    ['profile'],
+    {
+        tags: ['profile']
+    }
+)
 

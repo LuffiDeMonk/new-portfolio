@@ -5,6 +5,7 @@ import { Project } from "@/models/project"
 import { connect } from "@/utils/connect"
 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { revalidateTag } from "next/cache"
 
 export const addProject = async (prev: any, data: FormData) => {
     const newData = Object.fromEntries(data)
@@ -35,6 +36,7 @@ export const addProject = async (prev: any, data: FormData) => {
             repo,
             liveDemo
         })
+        revalidateTag('projects')
         return {
             type: 'success',
             message: "Project added successfully"
