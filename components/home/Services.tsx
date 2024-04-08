@@ -11,20 +11,20 @@ const serviceTabs = [
     {
         id: crypto.randomUUID(),
         title: 'Frontend Solutions',
-        description: 'Offer tailored frontend development solutions to meet the unique needs of your clients.',
+        description: 'Leveraging cutting-edge technologies such as React and Next JS, I build user interfaces that are not only visually stunning but also scalable and maintainable.',
         icon: <BadgeAlert size={80} className='text-blue-700' />
 
     },
     {
         id: crypto.randomUUID(),
         title: 'User-Centric Design',
-        description: 'Offer tailored frontend development solutions to meet the unique needs of your clients.',
+        description: 'I prioritize usability and accessibility to ensure that your frontend not only looks stunning but also delivers a delightful and frictionless user experience',
         icon: <Component size={80} className='text-blue-700' />
     },
     {
         id: crypto.randomUUID(),
         title: 'Integration',
-        description: 'Offer tailored frontend development solutions to meet the unique needs of your clients.',
+        description: 'Seamless integration between frontend and backend systems is crucial for the functionality and performance of any web application.',
         icon: <Blocks size={80} className='text-blue-700' />
     }
 ]
@@ -54,8 +54,8 @@ export default function Services() {
                     </p>
                 </MotionDiv>
                 <MotionDiv variants={variants}>
-                    <h2 className='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center leading-normal'>Build brands campaigns
-                        <br /> & digital projects</h2>
+                    <h2 className='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center leading-normal'>Frontend Development
+                        <br /> Solution Offered</h2>
                 </MotionDiv>
                 <div className="grid gap-8 grid-cols 1 lg:grid-cols-3 mt-16">
                     {

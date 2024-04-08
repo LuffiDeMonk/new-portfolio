@@ -4,14 +4,21 @@ import Image from 'next/image'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
-import { Facebook, Github, Linkedin } from 'lucide-react'
+import { Facebook, Github, Linkedin, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Container from './Container'
 import Link from 'next/link'
 import { Links } from '@/constants/HomeNavlink'
 import MobileNavigation from './MobileNavigation'
+import { MotionNav } from '../motion'
 
-export default function Navbar() {
+type NavbarProps = {
+    email: string,
+    github: string,
+    linkedin: string
+}
+
+export default function Navbar({ email, github, linkedin }: NavbarProps) {
     const pathname = usePathname()
     const [hidden, setHidden] = useState(false)
     const [bg, setBg] = useState(false)
@@ -46,7 +53,7 @@ export default function Navbar() {
 
 
     return (
-        <motion.nav
+        <MotionNav
             variants={navbarVariants}
             animate={hidden ? "hidden" : "animate"}
             transition={{
@@ -67,18 +74,18 @@ export default function Navbar() {
                     }
                 </div>
                 <div className="hidden lg:flex items-center justify-end gap-4 w-1/3 shrink-0">
-                    <div className='rounded-full border border-black p-1.5 flex items-center justify-center'>
-                        <Facebook size={18} />
-                    </div>
-                    <div className='rounded-full border border-black p-1.5 flex items-center justify-center'>
+                    <Link href={`mailto:${email}`} target='_blank' className='rounded-full border border-black p-1.5 flex items-center justify-center'>
+                        <Mail size={18} />
+                    </Link>
+                    <Link href={github} target='_blank' className='rounded-full border border-black p-1.5 flex items-center justify-center'>
                         <Github size={18} />
-                    </div>
-                    <div className='rounded-full border border-black p-1.5 flex items-center justify-center'>
+                    </Link>
+                    <Link href={`https://${linkedin}`} target='_blank' className='rounded-full border border-black p-1.5 flex items-center justify-center'>
                         <Linkedin size={18} />
-                    </div>
+                    </Link>
                 </div>
                 <MobileNavigation />
             </Container>
-        </motion.nav>
+        </MotionNav>
     )
 }

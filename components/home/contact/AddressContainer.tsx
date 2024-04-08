@@ -9,8 +9,8 @@ export default function AddressContainer() {
             <MotionDiv variants={variants} className="flex gap-3">
                 <HomeIcon size={35} className='text-gray-200' />
                 <div className='space-y-0.5'>
-                    <h3 className='text-xs sm:text-base'>Buttonwood, California.</h3>
-                    <p className='text-[10px] sm:text-sm text-gray-600'>Rosemead, CA 91770</p>
+                    <h3 className='text-xs sm:text-base'>Koteshwor, Kathmandu</h3>
+                    <p className='text-[10px] sm:text-sm text-gray-600'>Opposite to Mahadevsthan Temple</p>
                 </div>
             </MotionDiv>
             <MotionDiv variants={variants} className="flex gap-3">
