@@ -14,6 +14,7 @@ export const FetchSkills = unstable_cache(async <T>() => {
 },
     ['skills'],
     {
+        revalidate: 3600,
         tags: ['skills']
     }
 )

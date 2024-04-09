@@ -12,7 +12,9 @@ export const getProject = cache(async () => {
     }
 },
     ['projects']
-    , {
+    ,
+    {
+        revalidate: 3600,
         tags: ['projects']
     }
 )
