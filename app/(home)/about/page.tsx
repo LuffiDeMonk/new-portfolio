@@ -6,6 +6,11 @@ import Counter from '@/components/home/Counter'
 import SkillMarquee from '@/components/home/about/SkillMarquee'
 import { getGithubData } from '@/helpers/data/fetchGithubData'
 import Timeline from '@/components/home/Education'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'About'
+}
 
 export default async function About() {
     const githubdata = await getGithubData()

@@ -1,8 +1,8 @@
 import { IProject, Project } from "@/models/project"
 import { connect } from "@/utils/connect"
-import { unstable_cache } from "next/cache"
+import { unstable_cache as cache } from "next/cache"
 
-export const getProject = unstable_cache(async () => {
+export const getProject = cache(async () => {
     try {
         await connect()
         const projects: Array<IProject> = await Project.find({})
@@ -11,8 +11,8 @@ export const getProject = unstable_cache(async () => {
         console.log(error)
     }
 },
-    ['projects'],
-    {
+    ['projects']
+    , {
         tags: ['projects']
     }
 )

@@ -3,6 +3,7 @@
 import { Profile } from "@/models/profile"
 import { connect } from "@/utils/connect"
 import { ProfileFormValidation } from "@/validation/ProfileFormValidation"
+import { revalidateTag } from "next/cache"
 import { z } from "zod"
 
 export const addProfile = async (prev: any, data: z.infer<typeof ProfileFormValidation>) => {
@@ -18,7 +19,7 @@ export const addProfile = async (prev: any, data: z.infer<typeof ProfileFormVali
         const { description, email, firstName, github, lastName, linkedin, phone } = validatedFields.data
 
         await Profile.create({ firstName, lastName, description, email, phone, github, linkedin })
-
+        revalidateTag('profiles')
         return {
             message: "Profile data added successfully",
             type: 'success'
