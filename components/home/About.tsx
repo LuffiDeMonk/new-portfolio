@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { getProfile } from '@/helpers/data/fetchProfile'
 import { MotionDiv } from '../motion'
 import { AboutVariants, AboutVariants2 } from '@/constants/animation/marquee'
+import DownloadButton from './DownloadButton'
 
 
 
@@ -43,9 +44,7 @@ export default async function About() {
                 <MotionDiv variants={AboutVariants2}>
                     <p className='text-sm text-gray-400 leading-loose'>{profile?.[0]?.description}</p>
                 </MotionDiv>
-                <MotionDiv variants={AboutVariants2}>
-                    <Button className='w-fit p-6 rounded-none bg-blue-500 hover:text-blue-500 hover:bg-transparent hover:border hover:border-blue-500 transition-all duration-300'>Download CV</Button>
-                </MotionDiv>
+                <DownloadButton />
             </MotionDiv>
             {/* hero image */}
             <MotionDiv

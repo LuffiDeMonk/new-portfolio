@@ -1,5 +1,6 @@
 import Footer from '@/components/home/Footer'
 import Navbar from '@/components/home/Navbar'
+import ScrollToTop from '@/components/home/ScrollToTop'
 import { getProfile } from '@/helpers/data/fetchProfile'
 import { Suspense } from 'react'
 
@@ -15,6 +16,7 @@ export default async function Template({ children }: { children: React.ReactNode
                 />
             </Suspense>
             {children}
+            <ScrollToTop />
             <Footer />
         </>
     )
