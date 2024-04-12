@@ -9,7 +9,8 @@ import Timeline from '@/components/home/Education'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'About'
+    title: 'About',
+    description: "This page contains details about my experience and services I provide"
 }
 
 export default async function About() {

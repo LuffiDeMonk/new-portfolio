@@ -5,7 +5,8 @@ import { Metadata } from 'next'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
-    title: 'Projects'
+    title: 'Projects',
+    description: "This page contains all the projects which I completed or are running currently"
 }
 
 export default function Projects() {

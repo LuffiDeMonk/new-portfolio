@@ -13,7 +13,8 @@ export const getProfile = cache(async () => {
 },
     ['profiles'],
     {
-        tags: ['profiles']
+        tags: ['profiles'],
+        revalidate: 3600
     }
 )
 

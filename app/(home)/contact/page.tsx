@@ -9,7 +9,8 @@ import React from 'react'
 
 
 export const metadata: Metadata = {
-    title: 'Contact'
+    title: 'Contact',
+    description: 'This page contains contact form which allows to connect me with other individuals'
 }
 export default function Contact() {
     return (
