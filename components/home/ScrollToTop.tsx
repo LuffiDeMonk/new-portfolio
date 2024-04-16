@@ -40,7 +40,7 @@ export default function ScrollToTop() {
         <motion.section
             variants={scrollToTopVariants}
             animate={hide ? 'visible' : 'hidden'}
-            onClick={scrollToTop} className='cursor-pointer size-10 bg-white fixed bottom-10 border-l-2 right-10 z-[998] flex items-center justify-center border-2 border-gray-200 rounded-full'>
+            onClick={scrollToTop} className='cursor-pointer size-10 bg-white fixed bottom-10 border-l-2 right-10 z-20 flex items-center justify-center border-2 border-gray-200 rounded-full'>
             <ChevronUp />
         </motion.section>
     )
