@@ -2,14 +2,16 @@ import { Skill } from "@/models/skill";
 import { connect } from "@/utils/connect";
 import { unstable_cache } from "next/cache";
 
-
 export const FetchSkills = unstable_cache(async <T>() => {
     try {
-        await connect()
-        const Skills: Array<T> = await Skill.find({})
-        return Skills
+        if (!process.env.MONGODB_URL) return [];
+        const conn = await connect();
+        if (!conn) return [];
+        const Skills: Array<T> = await Skill.find({});
+        return Skills || [];
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching skills data:", error);
+        return [];
     }
 },
     ['skills'],

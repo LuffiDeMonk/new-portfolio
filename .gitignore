@@ -34,3 +34,42 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+
+# Documentation & Internal Notes
+docs/
+AGENTS.md
+ARCHITECTURE.md
+PRD.md
+DESIGN.md
+GEMINI.md
+
+
+# AI & LLM Assistants & Caches
+.gemini/
+.antigravity/
+.claude/
+.claude.json
+.claude-summary
+.cursor/
+.cursorindexing/
+.codeium/
+.windsurf/
+.continue/
+.cline/
+.roo/
+.copilot/
+.codex/
+.openai/
+.aider*
+.agent/
+.agents/
+.llm/

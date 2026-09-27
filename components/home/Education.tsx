@@ -14,7 +14,7 @@ export default async function Timeline() {
                     const startedFrom = new Date(item.from)
                     const endedAt = new Date(item.to)
                     return (
-                        <React.Fragment key={item._id}>
+                        <React.Fragment key={item._id.toString()}>
                             <div className='absolute -left-2 top-1/2 -translate-y-1/2 size-3 border bg-purple-400 rounded-full animate-ping duration-1000 origin-bottom' />
                             <div className='absolute -left-2 top-1/2 -translate-y-1/2 size-3 border bg-purple-400 rounded-full' />
                             <MotionDiv variants={variants} initial='initial' whileInView='whileInView' viewport={{ once: true }} className='h-fit p-4 ml-8 rounded-xl relative space-y-2'>

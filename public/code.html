@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prabhat Thapa — Frontend Engineer & UI Systems Architect</title>
+  
+  <!-- Fonts: Poppins (Headline & Body) + JetBrains Mono for Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            space: {
+              950: '#050507',
+              900: '#09090D',
+              850: '#0D0D12',
+              800: '#14141B',
+              700: '#1F1F2A',
+            },
+            electric: {
+              400: '#38BDF8',
+              500: '#0EA5E9',
+              glow: 'rgba(14, 165, 233, 0.25)',
+            },
+            cyan: {
+              300: '#67E8F9',
+              400: '#22D3EE',
+              glow: 'rgba(34, 211, 238, 0.25)',
+            },
+            violet: {
+              400: '#A78BFA',
+              500: '#8B5CF6',
+              glow: 'rgba(139, 92, 246, 0.25)',
+            }
+          },
+          backgroundImage: {
+            'grid-pattern': "radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px)",
+            'linear-radial': "radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.08) 0%, rgba(139, 92, 246, 0.03) 50%, transparent 80%)"
+          },
+          keyframes: {
+            pulseSubtle: {
+              '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+              '50%': { opacity: '0.6', transform: 'scale(1.05)' },
+            },
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            scanline: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(1000%)' },
+            }
+          },
+          animation: {
+            'pulse-subtle': 'pulseSubtle 6s ease-in-out infinite',
+            'float-slow': 'floatSlow 8s ease-in-out infinite',
+            'scanline': 'scanline 12s linear infinite',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar & Utilities */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050507;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F1F2A;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0EA5E9;
+    }
+    
+    .glass-panel {
+      background: rgba(13, 13, 18, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    
+    .glass-card-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: rgba(20, 20, 27, 0.85);
+      box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .glow-cyan {
+      box-shadow: 0 0 25px -5px rgba(34, 211, 238, 0.3);
+    }
+    
+    .text-glow {
+      text-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Custom horizontal scroll container for desktop projects */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-[#050507] text-[#F5F5F7] font-sans antialiased selection:bg-cyan-400 selection:text-black overflow-x-hidden">
+
+  <!-- Ambient Light Fields & Cosmic Depth Grid -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-electric-500/10 rounded-full blur-[140px] animate-pulse-subtle"></div>
+    <div class="absolute top-1/3 -right-40 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[160px]"></div>
+    <div class="absolute bottom-10 left-10 w-[700px] h-[700px] bg-cyan-400/5 rounded-full blur-[180px]"></div>
+    
+    <!-- Subtle 24px Engineering Coordinate Grid -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+  </div>
+
+  <!-- PERSISTENT TOP FLOATING NAVIGATION BAR -->
+  <header class="fixed top-6 inset-x-0 z-50 flex justify-center px-4 transition-all duration-300 pointer-events-none">
+    <div class="glass-panel pointer-events-auto rounded-full px-3 py-1.5 flex items-center gap-1 sm:gap-2 shadow-2xl border border-white/10 max-w-full overflow-x-auto no-scrollbar">
+      
+      <!-- Logo Mark / Spatial Indicator -->
+      <a href="#hero" class="flex items-center gap-2.5 px-3 py-1.5 rounded-full hover:bg-white/5 transition-colors group mr-1">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-electric-400 shadow-[0_0_8px_#38BDF8]"></span>
+        </span>
+        <span class="font-bold tracking-tight text-xs text-white/90 group-hover:text-cyan-300 transition-colors uppercase">P. THAPA</span>
+      </a>
+
+      <div class="h-3 w-[1px] bg-white/10 hidden sm:block"></div>
+
+      <!-- Navigation Links -->
+      <nav class="flex items-center text-[11px] font-medium tracking-wide">
+        <a href="#about" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all" data-target="about">ABOUT</a>
+        <a href="#skills" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all" data-target="skills">SKILLS</a>
+        <a href="#experience" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all" data-target="experience">CAREER</a>
+        <a href="#projects" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all" data-target="projects">PROJECTS</a>
+        <a href="#process" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all hidden md:block" data-target="process">PROCESS</a>
+        <a href="#code" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all hidden lg:block" data-target="code">SYSTEMS</a>
+        <a href="#metrics" class="nav-item px-3 py-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/5 transition-all hidden sm:block" data-target="metrics">METRICS</a>
+      </nav>
+
+      <div class="h-3 w-[1px] bg-white/10"></div>
+
+      <!-- Quick Action CTA -->
+      <a href="#contact" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-electric-500 to-cyan-400 text-black text-[11px] font-semibold tracking-wide hover:shadow-[0_0_16px_rgba(56,189,248,0.4)] transition-all">
+        CONTACT
+      </a>
+    </div>
+
+    <!-- Active Scroll Progress Indicator Line -->
+    <div id="scroll-progress-bar" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-electric-400 via-cyan-400 to-violet-500 w-0 transition-all duration-75"></div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 01 — HERO / OPENING SCENE -->
+  <!-- ======================================================== -->
+  <section id="hero" class="relative min-h-screen flex flex-col justify-between pt-28 pb-16 px-6 sm:px-12 lg:px-20 z-10">
+    
+    <!-- Top System Telemetry Status Bar -->
+    <div class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/5 pb-6 text-xs text-zinc-400 font-mono tracking-wider">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1.5 text-zinc-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          SYS.STATUS: OPERATIONAL
+        </span>
+        <span class="text-zinc-600">/</span>
+        <span>LAT: 27.7172° N · LON: 85.3240° E</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <span class="px-2 py-0.5 rounded border border-white/10 bg-white/5 text-cyan-300">REACT 19 / NEXT.JS 15</span>
+        <span class="hidden md:inline text-zinc-500">KATHMANDU, NEPAL</span>
+      </div>
+    </div>
+
+    <!-- Monumental Typography Hero Core -->
+    <div class="my-auto py-12 flex flex-col justify-center items-start max-w-7xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-400/20 bg-cyan-950/20 text-cyan-400 text-xs font-medium tracking-widest uppercase mb-6">
+        <svg class="w-3.5 h-3.5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+        </svg>
+        <span>Digital Product Experience & Frontend Systems</span>
+      </div>
+
+      <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-[#F5F5F7] leading-none uppercase select-none text-glow">
+        PRABHAT<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-600">THAPA</span>
+      </h1>
+
+      <p class="mt-8 max-w-2xl text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed">
+        Building scalable interfaces, production design systems, and resilient frontend architecture with <span class="text-white font-medium">React</span>, <span class="text-white font-medium">Next.js</span>, and <span class="text-white font-medium">TypeScript</span>.
+      </p>
+
+      <!-- CTA Buttons & Tech Chips -->
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href="#projects" class="group relative px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm tracking-wide transition-all duration-300 hover:bg-cyan-400 hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] flex items-center gap-2">
+          <span>Explore My Work</span>
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+
+        <a href="#contact" class="px-7 py-3.5 rounded-full glass-panel hover:bg-white/10 text-white font-medium text-sm tracking-wide transition-all duration-300 border border-white/15 flex items-center gap-2">
+          <span>Initialize Contact</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+        </a>
+
+        <div class="flex items-center gap-2 ml-2 pl-4 border-l border-white/10 text-xs text-zinc-500 font-mono hidden xl:flex">
+          <span>STACK: TS · NEXT · TAILWIND · TANSTACK</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator & Bottom Boundary -->
+    <div class="flex justify-between items-end pt-8 border-t border-white/5">
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span class="text-xs uppercase tracking-widest text-zinc-500 font-mono">SCROLL TO TRAVERSE SYSTEM</span>
+      </div>
+      <a href="#about" class="animate-bounce p-2 text-zinc-500 hover:text-white transition-colors" aria-label="Scroll down">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 02 — DIGITAL IDENTITY / ABOUT -->
+  <!-- ======================================================== -->
+  <section id="about" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex items-center gap-3 mb-16">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">02 / CORE IDENTITY</span>
+        <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+        <span class="text-xs font-mono text-zinc-600">SYSTEM ARCHITECTURE & DNA</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Column: Spatial Bio Statement & Holographic Node -->
+        <div class="lg:col-span-7 space-y-8">
+          <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            Engineering resilient user interfaces with mathematical clarity and product discipline.
+          </h2>
+
+          <p class="text-zinc-400 text-base sm:text-lg leading-relaxed font-normal">
+            Frontend engineer focused on building production-ready web applications, reusable component systems, data-heavy enterprise dashboards, and scalable frontend architecture. I treat codebases as living product systems where developer velocity and user fidelity are co-dependent.
+          </p>
+
+          <!-- Core Competency Matrices -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div class="glass-panel p-5 rounded-2xl glass-card-hover">
+              <div class="text-cyan-400 text-sm font-mono uppercase mb-2">01 / FOCUS</div>
+              <h4 class="text-white font-semibold text-base mb-1">Frontend Architecture</h4>
+              <p class="text-xs text-zinc-400 leading-normal">Modular component patterns, predictable state boundaries, and clean separation of concerns.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl glass-card-hover">
+              <div class="text-electric-400 text-sm font-mono uppercase mb-2">02 / SYSTEMS</div>
+              <h4 class="text-white font-semibold text-base mb-1">Design Systems</h4>
+              <p class="text-xs text-zinc-400 leading-normal">Tokenized design systems, accessible WAI-ARIA primitives, and zero-drift UI consistency.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-2xl glass-card-hover">
+              <div class="text-violet-400 text-sm font-mono uppercase mb-2">03 / PERFORMANCE</div>
+              <h4 class="text-white font-semibold text-base mb-1">Runtime Speed</h4>
+              <p class="text-xs text-zinc-400 leading-normal">Hydration optimization, code-splitting strategies, sub-100ms render metrics, and bundle profiling.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Abstract Spatial Avatar & Metrics Radar -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <!-- Spatial Abstract Identity Card -->
+          <div class="relative glass-panel rounded-3xl p-8 border border-white/10 overflow-hidden group">
+            <div class="absolute -right-16 -top-16 w-56 h-56 bg-electric-500/20 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-400/30 transition-all"></div>
+            
+            <div class="flex items-center justify-between mb-8">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-400 to-electric-600 flex items-center justify-center font-bold text-black text-sm shadow-[0_0_15px_rgba(34,211,238,0.4)]">
+                  PT
+                </div>
+                <div>
+                  <h3 class="text-sm font-semibold text-white">Prabhat Thapa</h3>
+                  <span class="text-xs text-zinc-400 font-mono">Frontend Engineer</span>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                ACTIVE FOR HIRES
+              </span>
+            </div>
+
+            <!-- Spatial Geometry Graphic -->
+            <div class="py-6 flex justify-center items-center">
+              <div class="relative w-44 h-44 flex items-center justify-center">
+                <!-- Concentric Rotating Engineering Rings -->
+                <div class="absolute inset-0 rounded-full border border-dashed border-white/20 animate-spin" style="animation-duration: 25s;"></div>
+                <div class="absolute inset-4 rounded-full border border-cyan-400/30 animate-spin" style="animation-duration: 18s; animation-direction: reverse;"></div>
+                <div class="absolute inset-8 rounded-full border border-violet-500/20"></div>
+                
+                <!-- Core Hub -->
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-space-800 to-space-950 border border-white/20 shadow-2xl flex flex-col items-center justify-center">
+                  <span class="text-[10px] font-mono text-cyan-400">ENGINEER</span>
+                  <span class="text-xs font-bold text-white tracking-wider">v1.0.4</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quantitative Baseline Badges -->
+            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/5 font-mono text-xs">
+              <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-zinc-500 block text-[10px]">EXPERIENCE</span>
+                <span class="text-white font-bold text-sm">01+ Years</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-zinc-500 block text-[10px]">PRODUCTION SHIPS</span>
+                <span class="text-cyan-400 font-bold text-sm">15+ Modules</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-zinc-500 block text-[10px]">CORE REPO CODE</span>
+                <span class="text-white font-bold text-sm">100% TS</span>
+              </div>
+              <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-zinc-500 block text-[10px]">DESIGN FIDELITY</span>
+                <span class="text-emerald-400 font-bold text-sm">99.8% Match</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 03 — TECHNOLOGY MAP / SPATIAL CLUSTER -->
+  <!-- ======================================================== -->
+  <section id="skills" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10 bg-space-900/60 border-y border-white/5">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-16">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">03 / SPATIAL TECH GRAPH</span>
+          <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+          <span class="text-xs font-mono text-zinc-500">CLUSTERED CAPABILITIES</span>
+        </div>
+        <div class="text-xs font-mono text-zinc-400">NODES: 16 ACTIVE · PROTOCOLS: MODERN WEB</div>
+      </div>
+
+      <div class="mb-12 max-w-2xl">
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          Integrated Technology Mesh
+        </h2>
+        <p class="text-zinc-400 text-base">
+          A coherent stack engineered for type-safe data flow, responsive reactive rendering, and reliable build pipelines.
+        </p>
+      </div>
+
+      <!-- Spatial Clustered Graph Architecture -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- CLUSTER 1: FRONTEND & FRAMEWORKS -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-1">CLUSTER A</h3>
+          <h4 class="text-lg font-bold text-white mb-4">Frontend Core</h4>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-400/30 transition-colors">
+              <span class="text-zinc-200">React 18 / 19</span>
+              <span class="text-cyan-400 font-semibold">Specialist</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-400/30 transition-colors">
+              <span class="text-zinc-200">Next.js (App Router)</span>
+              <span class="text-cyan-400 font-semibold">SSR/SSG</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-400/30 transition-colors">
+              <span class="text-zinc-200">TypeScript</span>
+              <span class="text-cyan-400 font-semibold">Strict Typing</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-cyan-400/30 transition-colors">
+              <span class="text-zinc-200">JavaScript (ESNext)</span>
+              <span class="text-zinc-500">Native API</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CLUSTER 2: UI SYSTEMS & STYLING -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="w-8 h-8 rounded-xl bg-electric-500/10 border border-electric-400/30 flex items-center justify-center text-electric-400 mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+            </svg>
+          </div>
+          <h3 class="text-xs font-mono text-electric-400 uppercase tracking-widest mb-1">CLUSTER B</h3>
+          <h4 class="text-lg font-bold text-white mb-4">UI Systems & Design</h4>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-electric-400/30 transition-colors">
+              <span class="text-zinc-200">Tailwind CSS</span>
+              <span class="text-electric-400 font-semibold">Utility-first</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-electric-400/30 transition-colors">
+              <span class="text-zinc-200">Radix UI / Shadcn</span>
+              <span class="text-electric-400 font-semibold">Headless</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-electric-400/30 transition-colors">
+              <span class="text-zinc-200">Framer Motion</span>
+              <span class="text-electric-400 font-semibold">Gesture/Physics</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-electric-400/30 transition-colors">
+              <span class="text-zinc-200">Storybook</span>
+              <span class="text-zinc-500">Component QA</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CLUSTER 3: STATE & DATA LAYER -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="w-8 h-8 rounded-xl bg-violet-500/10 border border-violet-400/30 flex items-center justify-center text-violet-400 mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xs font-mono text-violet-400 uppercase tracking-widest mb-1">CLUSTER C</h3>
+          <h4 class="text-lg font-bold text-white mb-4">Data & Querying</h4>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-violet-400/30 transition-colors">
+              <span class="text-zinc-200">TanStack Query</span>
+              <span class="text-violet-400 font-semibold">Cache Sync</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-violet-400/30 transition-colors">
+              <span class="text-zinc-200">GraphQL / Apollo</span>
+              <span class="text-violet-400 font-semibold">Schema Query</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-violet-400/30 transition-colors">
+              <span class="text-zinc-200">REST & Axios</span>
+              <span class="text-zinc-500">HTTP/2</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-violet-400/30 transition-colors">
+              <span class="text-zinc-200">Zustand</span>
+              <span class="text-zinc-500">Atomic State</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CLUSTER 4: PLATFORM, DEVOPS & TESTING -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden group">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-400/30 flex items-center justify-center text-emerald-400 mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-1">CLUSTER D</h3>
+          <h4 class="text-lg font-bold text-white mb-4">Backend & DevOps</h4>
+          
+          <ul class="space-y-3 font-mono text-xs">
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-emerald-400/30 transition-colors">
+              <span class="text-zinc-200">Node.js / Express</span>
+              <span class="text-emerald-400 font-semibold">Services</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-emerald-400/30 transition-colors">
+              <span class="text-zinc-200">PostgreSQL</span>
+              <span class="text-zinc-500">SQL Model</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-emerald-400/30 transition-colors">
+              <span class="text-zinc-200">Docker & Git</span>
+              <span class="text-emerald-400 font-semibold">CI / Pipelines</span>
+            </li>
+            <li class="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 hover:border-emerald-400/30 transition-colors">
+              <span class="text-zinc-200">Jest / Vitest</span>
+              <span class="text-zinc-500">Unit Tests</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 04 — CAREER EXPERIENCE TIMELINE -->
+  <!-- ======================================================== -->
+  <section id="experience" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex items-center gap-3 mb-16">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">04 / TRACK RECORD</span>
+        <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+        <span class="text-xs font-mono text-zinc-500">PRODUCTION ROLES</span>
+      </div>
+
+      <div class="mb-14">
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          Engineering Trajectory
+        </h2>
+        <p class="text-zinc-400 text-base max-w-xl">
+          Progressive experience taking high-complexity features from product design handoff to deployed production infrastructure.
+        </p>
+      </div>
+
+      <!-- Cinematic Timeline Journey -->
+      <div class="relative border-l border-white/10 ml-4 sm:ml-8 pl-8 sm:pl-12 space-y-16">
+        
+        <!-- Experience 01: Veel Inc. -->
+        <div class="relative group">
+          <!-- Timeline Marker Node -->
+          <div class="absolute -left-[41px] sm:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-space-950 border-2 border-cyan-400 shadow-[0_0_12px_#38BDF8] flex items-center justify-center">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-300"></span>
+          </div>
+
+          <div class="glass-panel p-8 rounded-3xl border border-white/10 group-hover:border-cyan-400/30 transition-all">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+              <div>
+                <div class="flex items-center gap-3">
+                  <h3 class="text-2xl font-bold text-white">Veel Inc.</h3>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">CURRENT / RECENT</span>
+                </div>
+                <div class="text-sm font-semibold text-zinc-300 mt-1">Frontend Engineer</div>
+              </div>
+              <div class="font-mono text-xs text-zinc-500 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5 w-fit">
+                TIMEFRAME: [DURATION PLACEHOLDER] · KATHMANDU / REMOTE
+              </div>
+            </div>
+
+            <!-- Bulleted Concrete Engineering Contributions -->
+            <div class="space-y-3 mb-6 text-sm text-zinc-300 font-normal">
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyan-400 mt-1 font-mono text-xs">▸</span>
+                <span>Engineered and standardized reusable React component architecture, reducing cross-team UI divergence across production interfaces.</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyan-400 mt-1 font-mono text-xs">▸</span>
+                <span>Built complex moderator dashboards and real-time state synchronization workflows using Next.js, TanStack Query, and GraphQL.</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyan-400 mt-1 font-mono text-xs">▸</span>
+                <span>Implemented automated UI testing workflows with Storybook and Jest, preventing regression on shared design system primitives.</span>
+              </div>
+            </div>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap items-center gap-2 pt-4 border-t border-white/5 font-mono text-xs text-zinc-400">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">React</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">Next.js</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">TypeScript</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-cyan-300">GraphQL</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-cyan-300">Storybook</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 02: SunAI -->
+        <div class="relative group">
+          <!-- Timeline Marker Node -->
+          <div class="absolute -left-[41px] sm:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-space-950 border-2 border-zinc-600 group-hover:border-electric-400 transition-colors flex items-center justify-center">
+            <span class="w-1.5 h-1.5 rounded-full bg-zinc-500 group-hover:bg-electric-400"></span>
+          </div>
+
+          <div class="glass-panel p-8 rounded-3xl border border-white/10 group-hover:border-electric-400/30 transition-all">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+              <div>
+                <div class="flex items-center gap-3">
+                  <h3 class="text-2xl font-bold text-white">SunAI</h3>
+                  <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-white/5 text-zinc-400 border border-white/10">PRODUCT FIRM</span>
+                </div>
+                <div class="text-sm font-semibold text-zinc-300 mt-1">Frontend / Software Engineer</div>
+              </div>
+              <div class="font-mono text-xs text-zinc-500 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5 w-fit">
+                ENGINEERING CORE · PRODUCTION SYSTEM
+              </div>
+            </div>
+
+            <!-- Bulleted Concrete Engineering Contributions -->
+            <div class="space-y-3 mb-6 text-sm text-zinc-300 font-normal">
+              <div class="flex items-start gap-2.5">
+                <span class="text-electric-400 mt-1 font-mono text-xs">▸</span>
+                <span>Architected analytics and telemetry views utilizing Next.js, TanStack Table, and Nivo charts for high-density dataset inspection.</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-electric-400 mt-1 font-mono text-xs">▸</span>
+                <span>Optimized client-side rendering bottlenecks, slashing re-render cascades across dynamic multi-filter data grids.</span>
+              </div>
+            </div>
+
+            <!-- Tech Badges -->
+            <div class="flex flex-wrap items-center gap-2 pt-4 border-t border-white/5 font-mono text-xs text-zinc-400">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">Next.js</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">GraphQL</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-electric-400">TanStack Table</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-electric-400">Nivo Charts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 03: Hunchha Digital -->
+        <div class="relative group">
+          <!-- Timeline Marker Node -->
+          <div class="absolute -left-[41px] sm:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-space-950 border-2 border-zinc-700 flex items-center justify-center">
+            <span class="w-1.5 h-1.5 rounded-full bg-zinc-600"></span>
+          </div>
+
+          <div class="glass-panel p-8 rounded-3xl border border-white/10 group-hover:border-white/20 transition-all">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 class="text-2xl font-bold text-white">Hunchha Digital</h3>
+                <div class="text-sm font-semibold text-zinc-300 mt-1">Frontend Developer Intern</div>
+              </div>
+              <div class="font-mono text-xs text-zinc-500 bg-white/5 px-3 py-1.5 rounded-xl border border-white/5 w-fit">
+                FOUNDATIONAL APPRENTICESHIP
+              </div>
+            </div>
+
+            <p class="text-sm text-zinc-300 mb-6 leading-relaxed">
+              Developed responsive web interfaces, translated high-fidelity Figma specifications into clean semantic HTML/CSS and React components, and collaborated with senior engineering teams on agile sprint deliveries.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-2 pt-4 border-t border-white/5 font-mono text-xs text-zinc-400">
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">React.js</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">Tailwind CSS</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-zinc-300">REST APIs</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 05 — FEATURED PROJECTS / HORIZONTAL WORLD SHOWCASE -->
+  <!-- ======================================================== -->
+  <section id="projects" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10 bg-[#09090D] border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-16">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">05 / FLAGSHIP PRODUCTS</span>
+          <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+          <span class="text-xs font-mono text-zinc-500">PRODUCTION WORKSPACES</span>
+        </div>
+        <div class="text-xs font-mono text-zinc-400">4 PRODUCTION CASES DISPLAYED</div>
+      </div>
+
+      <div class="mb-14">
+        <h2 class="text-4xl sm:text-6xl font-bold tracking-tight text-white mb-4">
+          Engineered Artifacts
+        </h2>
+        <p class="text-zinc-400 text-base max-w-2xl">
+          High-performance digital products built with rigorous interaction architecture, scalable data models, and meticulous visual craft.
+        </p>
+      </div>
+
+      <!-- Vertical Stack of Expansive Product Showcases -->
+      <div class="space-y-20">
+        
+        <!-- PROJECT 01: LAUNCHPAD -->
+        <article class="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-cyan-400/40">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-space-950/70">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">PROJECT // 01</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
+                  <span class="text-xs font-mono text-zinc-500">SaaS PLATFORM</span>
+                </div>
+                
+                <h3 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-4">
+                  Launchpad
+                </h3>
+                
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6">
+                  Comprehensive developer deployment command center featuring real-time cluster telemetry, automated preview environments, and instant rollback controls.
+                </p>
+
+                <!-- Problem Solved & Engineering Notes -->
+                <div class="space-y-4 mb-8 text-xs font-mono">
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-cyan-400 block mb-1">ARCHITECTURAL CHALLENGE:</span>
+                    <span class="text-zinc-400">Synchronizing live build logs via WebSockets without triggering render thrashing in the React reconciliation tree.</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-emerald-400 block mb-1">IMPACT:</span>
+                    <span class="text-zinc-400">Sub-50ms UI update cycle for heavy streaming pipelines with 5,000+ line logs.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tech Stack & Action Links -->
+              <div>
+                <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Next.js 14</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">TypeScript</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-cyan-400">TanStack Query</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Tailwind</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">WebSockets</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <a href="#projects" class="px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2">
+                    <span>Live Demo</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  </a>
+                  <a href="#projects" class="px-5 py-2.5 rounded-xl glass-panel text-white font-mono text-xs tracking-wider uppercase hover:bg-white/10 transition-colors flex items-center gap-2">
+                    <span>Source Code</span>
+                    <svg class="w-3.5 h-3.5 text-zinc-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup Workspace -->
+            <div class="lg:col-span-7 bg-space-900 p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
+              <div class="w-full rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden">
+                <!-- Browser Chrome Top Bar -->
+                <div class="px-4 py-3 bg-space-850 border-b border-white/5 flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <div class="px-3 py-1 rounded bg-black/40 text-zinc-400 text-[11px] border border-white/5">
+                    https://launchpad.internal.engine/clusters/prod-eu
+                  </div>
+                  <div class="text-[10px] text-cyan-400 font-semibold">LIVE REPL</div>
+                </div>
+
+                <!-- Simulated Interface Canvas -->
+                <div class="p-6 space-y-4 bg-gradient-to-b from-space-950/90 to-space-900/90">
+                  <!-- Metrics Banner -->
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                      <span class="text-[10px] text-zinc-500 uppercase">Pods Active</span>
+                      <span class="text-white text-lg font-bold block">48 / 48</span>
+                      <span class="text-[10px] text-emerald-400">100% HEALTH</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                      <span class="text-[10px] text-zinc-500 uppercase">Avg Latency</span>
+                      <span class="text-cyan-400 text-lg font-bold block">14.2 ms</span>
+                      <span class="text-[10px] text-cyan-300">-3.4ms vs prev</span>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                      <span class="text-[10px] text-zinc-500 uppercase">Memory Allocation</span>
+                      <span class="text-violet-400 text-lg font-bold block">62.8%</span>
+                      <span class="text-[10px] text-zinc-400">4.2GB Buffer</span>
+                    </div>
+                  </div>
+
+                  <!-- Telemetry Visual Graph Simulation -->
+                  <div class="p-4 rounded-xl bg-black/50 border border-white/5 font-mono text-xs">
+                    <div class="flex justify-between items-center text-zinc-400 mb-3 text-[11px]">
+                      <span>EDGE ROUTE PACKETS</span>
+                      <span class="text-emerald-400">● 1.2k req/sec</span>
+                    </div>
+                    <!-- CSS Bar Visualizer -->
+                    <div class="flex items-end gap-1.5 h-20 pt-2 border-b border-white/10 pb-1">
+                      <div class="w-full bg-cyan-500/20 rounded-t h-[40%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/30 rounded-t h-[65%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/25 rounded-t h-[50%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/40 rounded-t h-[80%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/50 rounded-t h-[70%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/30 rounded-t h-[45%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-400/80 rounded-t h-[95%] shadow-[0_0_10px_#38BDF8]"></div>
+                      <div class="w-full bg-cyan-500/40 rounded-t h-[60%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/35 rounded-t h-[55%] hover:bg-cyan-400 transition-colors"></div>
+                      <div class="w-full bg-cyan-500/20 rounded-t h-[30%] hover:bg-cyan-400 transition-colors"></div>
+                    </div>
+                    <div class="flex justify-between text-[10px] text-zinc-600 mt-2">
+                      <span>00:00:01</span>
+                      <span>00:00:30</span>
+                      <span>NOW</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PROJECT 02: VEEL MODERATOR PLATFORM -->
+        <article class="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-electric-400/40">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-space-950/70">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-mono text-electric-400 uppercase tracking-widest">PROJECT // 02</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-electric-400"></span>
+                  <span class="text-xs font-mono text-zinc-500">INTERNAL TOOLING</span>
+                </div>
+                
+                <h3 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-4">
+                  Veel Moderator
+                </h3>
+                
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6">
+                  High-velocity content moderation engine handling hundreds of real-time multimedia flags, automated risk tagging, and dispute resolution workflows.
+                </p>
+
+                <div class="space-y-4 mb-8 text-xs font-mono">
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-electric-400 block mb-1">ARCHITECTURAL CHALLENGE:</span>
+                    <span class="text-zinc-400">Building instantaneous keyboard shortcuts and optimistic mutation updates to process 60+ queues per moderator per hour.</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-emerald-400 block mb-1">IMPACT:</span>
+                    <span class="text-zinc-400">38% decrease in resolution turnaround with zero desync anomalies.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">React</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">GraphQL</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-electric-400">Optimistic UI</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Radix UI</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <a href="#projects" class="px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-electric-400 transition-colors flex items-center gap-2">
+                    <span>Inspect System</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup Workspace -->
+            <div class="lg:col-span-7 bg-space-900 p-6 sm:p-8 flex items-center justify-center">
+              <div class="w-full rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden">
+                <div class="px-4 py-3 bg-space-850 border-b border-white/5 flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <div class="px-3 py-1 rounded bg-black/40 text-zinc-400 text-[11px] border border-white/5">
+                    veel://moderation-queue/ticket-89241
+                  </div>
+                  <div class="text-[10px] text-amber-400 font-semibold">PRIORITY: HIGH</div>
+                </div>
+
+                <div class="p-6 space-y-4 bg-gradient-to-b from-space-950/90 to-space-900/90">
+                  <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-between">
+                    <div>
+                      <div class="text-xs font-bold text-white mb-0.5">Flagged Entity #89241</div>
+                      <div class="text-[10px] text-zinc-400 font-mono">Reported: Spam Payload · User Trust Score: 41%</div>
+                    </div>
+                    <div class="flex gap-2">
+                      <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[10px] font-mono font-bold">REJECT [J]</span>
+                      <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">APPROVE [K]</span>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+                    <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                      <span class="text-zinc-500 text-[10px] block">PAYLOAD HEURISTICS</span>
+                      <span class="text-zinc-200">Text Entropy: 0.94 (Abnormal)</span>
+                    </div>
+                    <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                      <span class="text-zinc-500 text-[10px] block">ACTION HISTORY</span>
+                      <span class="text-zinc-200">2 Prior Infractions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PROJECT 03: VENDOR DASHBOARD -->
+        <article class="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-violet-400/40">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-space-950/70">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-mono text-violet-400 uppercase tracking-widest">PROJECT // 03</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-violet-400"></span>
+                  <span class="text-xs font-mono text-zinc-500">ANALYTICS ENGINE</span>
+                </div>
+                
+                <h3 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-4">
+                  Vendor Dashboard
+                </h3>
+                
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6">
+                  Enterprise merchant portal delivering live inventory forecasting, automated settlement reconciliations, and multi-currency payout processing.
+                </p>
+
+                <div class="space-y-4 mb-8 text-xs font-mono">
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-violet-400 block mb-1">ARCHITECTURAL CHALLENGE:</span>
+                    <span class="text-zinc-400">Rendering virtualized tables with 20,000+ SKU line items while maintaining instant client-side filtering and export.</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-emerald-400 block mb-1">IMPACT:</span>
+                    <span class="text-zinc-400">60 FPS scrolling fidelity on low-spec hardware without memory leaks.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Next.js</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-violet-400">TanStack Table</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Nivo Charts</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Zustand</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <a href="#projects" class="px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-violet-400 transition-colors flex items-center gap-2">
+                    <span>Inspect Metrics</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup Workspace -->
+            <div class="lg:col-span-7 bg-space-900 p-6 sm:p-8 flex items-center justify-center">
+              <div class="w-full rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden">
+                <div class="px-4 py-3 bg-space-850 border-b border-white/5 flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <div class="px-3 py-1 rounded bg-black/40 text-zinc-400 text-[11px] border border-white/5">
+                    https://vendors.network/analytics/reconciliation
+                  </div>
+                  <div class="text-[10px] text-emerald-400 font-semibold">SETTLED: $214.8K</div>
+                </div>
+
+                <div class="p-6 space-y-4 bg-gradient-to-b from-space-950/90 to-space-900/90">
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                      <span class="text-[10px] text-zinc-500 block">TOTAL VOLUME</span>
+                      <span class="text-white text-base font-bold">$842,910.00</span>
+                    </div>
+                    <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                      <span class="text-[10px] text-zinc-500 block">ACTIVE SKUs</span>
+                      <span class="text-cyan-400 text-base font-bold">14,204 Units</span>
+                    </div>
+                    <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                      <span class="text-[10px] text-zinc-500 block">DISPUTE RATE</span>
+                      <span class="text-emerald-400 text-base font-bold">0.02%</span>
+                    </div>
+                  </div>
+
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5 text-[11px] font-mono text-zinc-400">
+                    <div class="flex justify-between border-b border-white/5 pb-2 text-zinc-500 text-[10px]">
+                      <span>TRANSACTION REF</span>
+                      <span>MERCHANT</span>
+                      <span>NET AMOUNT</span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-white/5">
+                      <span class="text-zinc-200">#TXN-90184</span>
+                      <span>Apex Hardware</span>
+                      <span class="text-emerald-400">+$12,450.00</span>
+                    </div>
+                    <div class="flex justify-between py-2">
+                      <span class="text-zinc-200">#TXN-90185</span>
+                      <span>Solstice Logistics</span>
+                      <span class="text-emerald-400">+$4,210.50</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- PROJECT 04: UNIFIED EVENT PLATFORM -->
+        <article class="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-500 hover:border-cyan-400/40">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-space-950/70">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">PROJECT // 04</span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-cyan-400"></span>
+                  <span class="text-xs font-mono text-zinc-500">EVENT ENGINE</span>
+                </div>
+                
+                <h3 class="text-3xl sm:text-4xl font-black tracking-tight text-white mb-4">
+                  Unified Event Platform
+                </h3>
+                
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6">
+                  Interactive conference and experiential platform integrating low-latency live streaming, collaborative break-out sessions, and attendee networking.
+                </p>
+
+                <div class="space-y-4 mb-8 text-xs font-mono">
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-cyan-400 block mb-1">ARCHITECTURAL CHALLENGE:</span>
+                    <span class="text-zinc-400">Synchronized live poll state across 10,000 concurrent browser nodes with sub-second feedback aggregation.</span>
+                  </div>
+                  <div class="p-3.5 rounded-xl bg-white/[0.02] border border-white/5">
+                    <span class="text-emerald-400 block mb-1">IMPACT:</span>
+                    <span class="text-zinc-400">Zero service drops across 4 global tech summits.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Next.js</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">TypeScript</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-cyan-400">WebRTC</span>
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 text-zinc-300">Tailwind</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <a href="#projects" class="px-5 py-2.5 rounded-xl bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2">
+                    <span>Explore Platform</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup Workspace -->
+            <div class="lg:col-span-7 bg-space-900 p-6 sm:p-8 flex items-center justify-center">
+              <div class="w-full rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden">
+                <div class="px-4 py-3 bg-space-850 border-b border-white/5 flex items-center justify-between text-xs font-mono text-zinc-500">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <div class="px-3 py-1 rounded bg-black/40 text-zinc-400 text-[11px] border border-white/5">
+                    https://stage.events.live/stream/keynote
+                  </div>
+                  <div class="text-[10px] text-cyan-400 font-semibold">ATTENDEES: 8,490</div>
+                </div>
+
+                <div class="p-6 space-y-4 bg-gradient-to-b from-space-950/90 to-space-900/90">
+                  <div class="aspect-video w-full rounded-xl bg-black border border-white/10 flex flex-col justify-between p-4 relative overflow-hidden">
+                    <div class="flex justify-between items-center z-10">
+                      <span class="px-2 py-0.5 rounded bg-rose-500 text-white font-mono text-[10px] font-bold">● LIVE 4K</span>
+                      <span class="text-zinc-400 font-mono text-xs">BITRATE: 12.4 Mbps</span>
+                    </div>
+                    
+                    <div class="my-auto text-center z-10">
+                      <h4 class="text-lg font-bold text-white">KEYNOTE: THE FUTURE OF REACT RUNTIMES</h4>
+                      <p class="text-xs text-zinc-400">Streamed from Main Stage Amsterdam</p>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs font-mono text-zinc-400 z-10 border-t border-white/10 pt-2">
+                      <span>AUDIO: STEREO 48kHz</span>
+                      <span class="text-cyan-400">INTERACTIVE Q&A OPEN</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 06 — ENGINEERING PROCESS / HOW I BUILD -->
+  <!-- ======================================================== -->
+  <section id="process" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex items-center gap-3 mb-16">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">06 / METHODOLOGY</span>
+        <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+        <span class="text-xs font-mono text-zinc-500">DISCIPLINED EXECUTION</span>
+      </div>
+
+      <div class="mb-16">
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          How I Build: Engineering Pipeline
+        </h2>
+        <p class="text-zinc-400 text-base max-w-2xl">
+          Transforming ambiguous business challenges into resilient, maintainable, and verifiable frontend code.
+        </p>
+      </div>
+
+      <!-- Progressive Pipeline Flow -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- STEP 01 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative group">
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-3xl font-black text-zinc-600 font-mono group-hover:text-cyan-400 transition-colors">01</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-400/10 text-cyan-400">FOUNDATION</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Architecture & Spec</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+            Component hierarchy mapping, schema modeling, edge-case audit, and client/server component boundary definitions.
+          </p>
+          <div class="text-[11px] font-mono text-zinc-500 border-t border-white/5 pt-3">
+            ARTIFACT: System Diagram & API Contracts
+          </div>
+        </div>
+
+        <!-- STEP 02 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative group">
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-3xl font-black text-zinc-600 font-mono group-hover:text-electric-400 transition-colors">02</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-electric-400/10 text-electric-400">SYSTEMS</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Design Tokens & UI</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+            Extracting atomic tokens, standardizing spacing and typography curves, and constructing accessible WAI-ARIA primitives.
+          </p>
+          <div class="text-[11px] font-mono text-zinc-500 border-t border-white/5 pt-3">
+            ARTIFACT: Isolated Storybook Library
+          </div>
+        </div>
+
+        <!-- STEP 03 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative group">
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-3xl font-black text-zinc-600 font-mono group-hover:text-violet-400 transition-colors">03</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-violet-400/10 text-violet-400">ENGINEERING</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Type-Safe Build</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+            Strict TypeScript implementation, optimistic cache mutations, error-boundary fencing, and responsive fluid layout.
+          </p>
+          <div class="text-[11px] font-mono text-zinc-500 border-t border-white/5 pt-3">
+            ARTIFACT: Production Next.js Routes
+          </div>
+        </div>
+
+        <!-- STEP 04 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 relative group">
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-3xl font-black text-zinc-600 font-mono group-hover:text-emerald-400 transition-colors">04</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-400/10 text-emerald-400">VERIFY</span>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Perf & Deploy</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+            Lighthouse 100 audit, Web Vitals tuning, bundle size tree-shaking, and automated CI/CD containerization.
+          </p>
+          <div class="text-[11px] font-mono text-zinc-500 border-t border-white/5 pt-3">
+            ARTIFACT: Zero-Downtime Release
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 07 — CODE & TECHNICAL SHOWCASE -->
+  <!-- ======================================================== -->
+  <section id="code" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10 bg-space-900/60 border-y border-white/5">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex items-center gap-3 mb-16">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">07 / TECHNICAL CRAFT</span>
+        <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+        <span class="text-xs font-mono text-zinc-500">TYPESCRIPT EXCELLENCE</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Explanatory Column -->
+        <div class="lg:col-span-5 space-y-6">
+          <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            Code as Product Infrastructure
+          </h2>
+          <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">
+            I write readable, strictly typed, self-documenting code. Frontend reliability isn’t accidental; it stems from rigorous interfaces, runtime validation, and resilient error bounds.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-300">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span>Generic React Component Typing</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-300">
+              <span class="w-2 h-2 rounded-full bg-electric-400"></span>
+              <span>Predictable TanStack Cache Mutations</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-mono text-zinc-300">
+              <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+              <span>Zero-Leak Event Listeners & Cleanups</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Holographic IDE Window -->
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl glass-panel border border-white/10 shadow-2xl overflow-hidden font-mono text-xs">
+            
+            <!-- Editor Titlebar Tabs -->
+            <div class="px-4 py-3 bg-space-850 border-b border-white/5 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                <div class="flex items-center gap-1.5 ml-4 px-3 py-1 rounded bg-black/40 border border-white/5 text-cyan-300">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  <span>useOptimisticMutation.ts</span>
+                </div>
+              </div>
+              <span class="text-zinc-500 text-[11px]">TypeScript 5.4 · Strict</span>
+            </div>
+
+            <!-- Code Body with Syntax Highlighting -->
+            <div class="p-6 bg-space-950/95 text-zinc-300 overflow-x-auto leading-relaxed">
+<pre class="font-mono text-xs"><span class="text-zinc-500">// Modern Type-Safe Optimistic Hook Implementation</span>
+<span class="text-violet-400">import</span> { useMutation, useQueryClient } <span class="text-violet-400">from</span> <span class="text-emerald-300">'@tanstack/react-query'</span>;
+
+<span class="text-violet-400">export interface</span> <span class="text-cyan-300">MutationConfig</span>&lt;<span class="text-amber-300">TData</span>, <span class="text-amber-300">TVariables</span>&gt; {
+  mutationKey: <span class="text-cyan-300">string</span>[];
+  mutationFn: (<span class="text-zinc-300">vars</span>: <span class="text-amber-300">TVariables</span>) =&gt; <span class="text-cyan-300">Promise</span>&lt;<span class="text-amber-300">TData</span>&gt;;
+  onRollback?: (<span class="text-zinc-300">err</span>: <span class="text-cyan-300">unknown</span>) =&gt; <span class="text-cyan-300">void</span>;
+}
+
+<span class="text-violet-400">export function</span> <span class="text-electric-400">useOptimisticRecord</span>&lt;<span class="text-amber-300">T</span> <span class="text-violet-400">extends</span> { id: <span class="text-cyan-300">string</span> }&gt;(
+  config: <span class="text-cyan-300">MutationConfig</span>&lt;<span class="text-amber-300">T</span>, <span class="text-amber-300">Partial</span>&lt;<span class="text-amber-300">T</span>&gt;&gt;
+) {
+  <span class="text-violet-400">const</span> queryClient = <span class="text-electric-400">useQueryClient</span>();
+
+  <span class="text-violet-400">return</span> <span class="text-electric-400">useMutation</span>({
+    mutationFn: config.mutationFn,
+    onMutate: <span class="text-violet-400">async</span> (updatedFields) =&gt; {
+      <span class="text-violet-400">await</span> queryClient.<span class="text-electric-400">cancelQueries</span>({ queryKey: config.mutationKey });
+      <span class="text-violet-400">const</span> previous = queryClient.<span class="text-electric-400">getQueryData</span>&lt;<span class="text-amber-300">T</span>&gt;(config.mutationKey);
+      
+      queryClient.<span class="text-electric-400">setQueryData</span>(config.mutationKey, (old: <span class="text-amber-300">T</span>) =&gt; ({
+        ...old,
+        ...updatedFields,
+      }));
+
+      <span class="text-violet-400">return</span> { previous };
+    },
+    onError: (_err, _vars, context) =&gt; {
+      <span class="text-violet-400">if</span> (context?.previous) {
+        queryClient.<span class="text-electric-400">setQueryData</span>(config.mutationKey, context.previous);
+      }
+    }
+  });
+}</pre>
+            </div>
+
+            <!-- IDE Status Footer -->
+            <div class="px-4 py-2 bg-space-900 border-t border-white/5 flex justify-between text-[11px] text-zinc-500 font-mono">
+              <div class="flex items-center gap-3">
+                <span class="text-emerald-400">● TS Check: 0 Errors</span>
+                <span>UTF-8</span>
+              </div>
+              <span>Spaces: 2</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 08 — ENGINEERING METRICS & TELEMETRY -->
+  <!-- ======================================================== -->
+  <section id="metrics" class="relative py-28 px-6 sm:px-12 lg:px-20 z-10">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Tag Header -->
+      <div class="flex items-center gap-3 mb-16">
+        <span class="text-xs font-mono tracking-widest text-cyan-400 uppercase">08 / TELEMETRY</span>
+        <div class="h-[1px] w-12 bg-cyan-400/40"></div>
+        <span class="text-xs font-mono text-zinc-500">QUANTITATIVE RECORD</span>
+      </div>
+
+      <div class="mb-14">
+        <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-4">
+          Telemetry & Engineering Quantities
+        </h2>
+        <p class="text-zinc-400 text-base max-w-xl">
+          Empirical measurements illustrating delivery focus, component reusability, and production consistency.
+        </p>
+      </div>
+
+      <!-- Telemetry Visual Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- METRIC 1 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-cyan-400/40 transition-colors">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono text-zinc-500 uppercase">EXPERIENCE</span>
+            <span class="text-cyan-400">↗</span>
+          </div>
+          <div class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-2">01+</div>
+          <div class="text-sm font-semibold text-zinc-200 mb-1">Years Active</div>
+          <p class="text-xs text-zinc-400">Continuous frontend & software development across product teams.</p>
+        </div>
+
+        <!-- METRIC 2 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-electric-400/40 transition-colors">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono text-zinc-500 uppercase">DELIVERIES</span>
+            <span class="text-electric-400">↗</span>
+          </div>
+          <div class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-2">XX</div>
+          <div class="text-sm font-semibold text-zinc-200 mb-1">Projects Deployed</div>
+          <p class="text-xs text-zinc-400">Complete web applications engineered from spec to production hosting.</p>
+        </div>
+
+        <!-- METRIC 3 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-violet-400/40 transition-colors">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono text-zinc-500 uppercase">SYSTEM PRIMITIVES</span>
+            <span class="text-violet-400">↗</span>
+          </div>
+          <div class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-2">XX</div>
+          <div class="text-sm font-semibold text-zinc-200 mb-1">Components Built</div>
+          <p class="text-xs text-zinc-400">Accessible, modular UI library tokens & compound components.</p>
+        </div>
+
+        <!-- METRIC 4 -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-emerald-400/40 transition-colors">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono text-zinc-500 uppercase">TECH BREADTH</span>
+            <span class="text-emerald-400">↗</span>
+          </div>
+          <div class="text-4xl sm:text-5xl font-black text-white tracking-tight mb-2">XX</div>
+          <div class="text-sm font-semibold text-zinc-200 mb-1">Technologies Mastered</div>
+          <p class="text-xs text-zinc-400">Modern reactive libraries, database drivers, and cloud CI pipelines.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 09 — FINAL CONTACT & CALM DESTINATION -->
+  <!-- ======================================================== -->
+  <section id="contact" class="relative min-h-[90vh] flex flex-col justify-between py-24 px-6 sm:px-12 lg:px-20 z-10 border-t border-white/10 bg-gradient-to-b from-[#050507] to-black">
+    
+    <div class="max-w-4xl mx-auto my-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-400/20 bg-cyan-950/20 text-cyan-400 text-xs font-medium tracking-widest uppercase mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+        INITIATE DIALOGUE
+      </div>
+
+      <h2 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 uppercase">
+        Let’s Build Something Meaningful.
+      </h2>
+
+      <p class="text-zinc-400 text-base sm:text-xl font-normal max-w-xl mx-auto mb-12 leading-relaxed">
+        Have a product, interface, or engineering problem worth solving? I am available for forward-thinking engineering teams and select contract opportunities.
+      </p>
+
+      <!-- Primary Action Hub -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="mailto:replace-email@example.com" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black font-semibold text-sm tracking-wide hover:bg-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all flex items-center justify-center gap-2">
+          <span>EMAIL ME</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        </a>
+
+        <a href="https://github.com/replace-github-url" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel hover:bg-white/10 text-white font-medium text-sm tracking-wide transition-all border border-white/15 flex items-center justify-center gap-2">
+          <span>VIEW GITHUB</span>
+          <svg class="w-4 h-4 text-zinc-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+
+        <a href="https://linkedin.com/in/replace-linkedin-url" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel hover:bg-white/10 text-white font-medium text-sm tracking-wide transition-all border border-white/15 flex items-center justify-center gap-2">
+          <span>LINKEDIN</span>
+          <svg class="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </div>
+
+      <!-- Replaceable Metadata Reference Box -->
+      <div class="inline-block p-4 rounded-2xl glass-panel border border-white/5 text-xs font-mono text-zinc-400">
+        <div>EMAIL: <span class="text-zinc-200">replace-email@example.com</span></div>
+        <div class="mt-1">BASE: <span class="text-zinc-200">Kathmandu, Nepal (Open to Global Remote)</span></div>
+      </div>
+    </div>
+
+    <!-- Final Persistent Minimal Footer -->
+    <div class="w-full flex flex-col sm:flex-row justify-between items-center gap-4 pt-12 border-t border-white/5 text-xs text-zinc-500 font-mono">
+      <div>
+        © 2025 PRABHAT THAPA · FRONTEND ARCHITECTURE
+      </div>
+      <div class="flex items-center gap-4">
+        <span>ENGINEERED WITH REACT & NEXT.JS CONCEPTS</span>
+        <a href="#hero" class="text-cyan-400 hover:underline">BACK TO TOP ↑</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Interactive Scroll Progress & Active Nav Script -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      const bar = document.getElementById('scroll-progress-bar');
+      if (bar) {
+        bar.style.width = scrolled + '%';
+      }
+
+      // Intersection tracking for floating nav
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-item');
+      let currentSection = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (winScroll >= sectionTop) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-target') === currentSection) {
+          link.classList.add('text-cyan-300', 'bg-white/10');
+          link.classList.remove('text-zinc-400');
+        } else {
+          link.classList.remove('text-cyan-300', 'bg-white/10');
+          link.classList.add('text-zinc-400');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

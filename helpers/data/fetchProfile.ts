@@ -4,11 +4,14 @@ import { unstable_cache as cache } from "next/cache";
 
 export const getProfile = cache(async () => {
     try {
-        await connect()
-        const profileInfo: Array<IProfile> = await Profile.find({})
-        return profileInfo
+        if (!process.env.MONGODB_URL) return [];
+        const conn = await connect();
+        if (!conn) return [];
+        const profileInfo: Array<IProfile> = await Profile.find({});
+        return profileInfo || [];
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching profile data:", error);
+        return [];
     }
 },
     ['profiles'],
@@ -17,4 +20,3 @@ export const getProfile = cache(async () => {
         revalidate: 3600
     }
 )
-

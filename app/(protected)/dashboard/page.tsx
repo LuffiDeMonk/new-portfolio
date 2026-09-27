@@ -12,10 +12,12 @@ import React from 'react'
 // }
 
 const getProject = async () => {
-    await connect()
+    if (!process.env.MONGODB_URL) return []
+    const conn = await connect()
+    if (!conn) return []
 
     const projectData: Array<IProject> = await Project.find()
-    return projectData
+    return projectData || []
 }
 
 export default async function Dashboard() {
@@ -24,7 +26,7 @@ export default async function Dashboard() {
     return (
         <div>
             {projects.map(project => (
-                <div key={project._id} className='mb-10'>
+                <div key={project._id.toString()} className='mb-10'>
                     <Image src={project.image} alt={project.skills} width={500} height={500} />
                 </div>
             ))}

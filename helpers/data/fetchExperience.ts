@@ -4,12 +4,14 @@ import { connect } from "@/utils/connect"
 
 export const getExperience = cache(async () => {
     try {
-        await connect()
-        const data: Array<IExperience> = await Experience.find({})
-        return data
+        if (!process.env.MONGODB_URL) return [];
+        const conn = await connect();
+        if (!conn) return [];
+        const data: Array<IExperience> = await Experience.find({});
+        return data || [];
     } catch (error) {
-        console.log(error)
-        throw new Error('Error while getting experience details')
+        console.error("Error fetching experience data:", error);
+        return [];
     }
 },
     ['experience'],
