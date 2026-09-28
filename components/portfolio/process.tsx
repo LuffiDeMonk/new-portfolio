@@ -52,7 +52,7 @@ export function Process() {
         <SectionIntro
           number="05"
           label="PROCESS"
-          title={["HOW I", "BUILD"]}
+          title="HOW I BUILD"
           description="Transforming ambiguous business challenges into resilient, maintainable, and verifiable frontend code."
           align="left"
           accentColor="cyan"
