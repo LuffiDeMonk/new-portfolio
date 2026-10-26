@@ -13,7 +13,7 @@ interface ExperienceItem {
   tech: string[];
   contributions: string[];
   domain: string;
-  accentColor: "cyan" | "sky" | "violet";
+  accentColor: "cyan" | "sky" | "violet" | "emerald";
   themeBorder: string;
   themeText: string;
   themeBadge: string;
@@ -23,10 +23,32 @@ interface ExperienceItem {
 const EXPERIENCES: ExperienceItem[] = [
   {
     indexStr: "01",
+    company: "ARICALOT",
+    role: "Mid-Level Frontend Developer",
+    period: "July 2025 — Present",
+    status: "ACTIVE TENURE",
+    summary:
+      "Lead frontend development across product modules and greenfield platforms at Aricalot, architecting bus-booking flows, event management systems, reusable component architectures, and deployment workflows.",
+    tech: ["Next.js", "React 19", "TypeScript", "Redux Toolkit", "ShadCN UI", "Docker", "Tailwind CSS"],
+    contributions: [
+      "Led frontend engineering for Afnuu bus-booking module, building interactive seat selection, passenger details, payment integration, and dynamic e-ticket generation",
+      "Engineered predictable application state and reusable UI component primitives utilizing Redux Toolkit and TypeScript",
+      "Architected Unified Global Events client and admin portals from scratch with Next.js, React 19, and ShadCN UI, managing event booking and administration features",
+      "Standardized Docker containerization for reliable deployment while providing technical guidance and peer code reviews for intern developers",
+    ],
+    domain: "FRONTEND SYSTEMS · APP ARCHITECTURE",
+    accentColor: "cyan",
+    themeBorder: "border-cyan-400/30",
+    themeText: "text-cyan-300",
+    themeBadge: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
+    bgWatermark: "ARICALOT",
+  },
+  {
+    indexStr: "02",
     company: "VEEL INC.",
     role: "Frontend Engineer",
-    period: "2024 — Present",
-    status: "ACTIVE TENURE",
+    period: "2024 — 2025",
+    status: "PREVIOUS IMPACT",
     summary:
       "Build scalable frontend experiences and reusable UI systems for production applications with strict design token parity.",
     tech: ["React", "Next.js", "TypeScript", "React Query", "Storybook", "Jest"],
@@ -38,14 +60,14 @@ const EXPERIENCES: ExperienceItem[] = [
       "Maintained production UI design tokens and micro-interaction libraries for core workflows",
     ],
     domain: "PRODUCTION · COMPONENT ARCHITECTURE",
-    accentColor: "cyan",
-    themeBorder: "border-cyan-400/30",
-    themeText: "text-cyan-300",
-    themeBadge: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
+    accentColor: "sky",
+    themeBorder: "border-sky-400/30",
+    themeText: "text-sky-300",
+    themeBadge: "bg-sky-400/10 text-sky-300 border-sky-400/20",
     bgWatermark: "VEEL",
   },
   {
-    indexStr: "02",
+    indexStr: "03",
     company: "SUNAI",
     role: "Frontend Engineer",
     period: "2023 — 2024",
@@ -61,14 +83,14 @@ const EXPERIENCES: ExperienceItem[] = [
       "Integrated complex GraphQL schemas with client-side query normalization and state management",
     ],
     domain: "DATA VISUALIZATION · TELEMETRY",
-    accentColor: "sky",
-    themeBorder: "border-sky-400/30",
-    themeText: "text-sky-300",
-    themeBadge: "bg-sky-400/10 text-sky-300 border-sky-400/20",
+    accentColor: "violet",
+    themeBorder: "border-violet-400/30",
+    themeText: "text-violet-300",
+    themeBadge: "bg-violet-400/10 text-violet-300 border-violet-400/20",
     bgWatermark: "SUNAI",
   },
   {
-    indexStr: "03",
+    indexStr: "04",
     company: "HUNCHHA DIGITAL",
     role: "Frontend Developer Intern",
     period: "2022 — 2023",
@@ -84,10 +106,10 @@ const EXPERIENCES: ExperienceItem[] = [
       "Participated actively in agile team deliveries, sprint planning, and engineering code reviews",
     ],
     domain: "COMMERCE SYSTEMS · INTERFACE DEV",
-    accentColor: "violet",
-    themeBorder: "border-violet-400/30",
-    themeText: "text-violet-300",
-    themeBadge: "bg-violet-400/10 text-violet-300 border-violet-400/20",
+    accentColor: "emerald",
+    themeBorder: "border-emerald-400/30",
+    themeText: "text-emerald-300",
+    themeBadge: "bg-emerald-400/10 text-emerald-300 border-emerald-400/20",
     bgWatermark: "HUNCHHA",
   },
 ];
@@ -262,20 +284,19 @@ export function Experience() {
   }, []);
 
   // Split total scroll progress into:
-  // Phase 1 (0.00 to 0.20): Introduction Header (with smooth enter animation starting after Skills ends)
-  // Phase 2 (0.20 to 0.24): Visual Settling Buffer (Header is 100% vanished, cards not started)
-  // Phase 3 (0.24 to 0.30): Reveal of Fixed UI & Card 01 centered at rest (no horizontal motion)
-  // Phase 4 (0.30 to 0.92): Horizontal Parallax Carousel (Card 01 slides left, Card 02 enters, etc.)
-  // Phase 5 (0.92 to 1.00): Section Exit Kinematics before Projects begins
-  const introEnterRatio = Math.min(Math.max(progress / 0.08, 0), 1);
-  const introExitRatio = Math.min(Math.max((progress - 0.16) / 0.08, 0), 1);
-  const introOpacity = introEnterRatio * Math.max(0, 1 - introExitRatio);
-  const introTranslateY = (1 - introEnterRatio) * 36 - introExitRatio * 60;
-  const introScale = 0.94 + introEnterRatio * 0.06 - introExitRatio * 0.08;
-  const isIntroVisible = progress < 0.25;
+  // Phase 1 (0.00 to 0.14): Introduction Gateway ("CAREER IN MOTION" fully visible at section start)
+  // Phase 2 (0.14 to 0.22): Intro smoothly floats up and fades out
+  // Phase 3 (0.20 to 0.28): Fixed UI & Card 01 reveal centered at rest
+  // Phase 4 (0.30 to 0.92): Horizontal Parallax Carousel across cards
+  // Phase 5 (0.92 to 1.00): Section Exit Kinematics before next section
+  const introExitRatio = Math.min(Math.max((progress - 0.14) / 0.08, 0), 1);
+  const introOpacity = Math.max(0, 1 - introExitRatio);
+  const introTranslateY = -introExitRatio * 60;
+  const introScale = 1 - introExitRatio * 0.08;
+  const isIntroVisible = progress < 0.24;
 
-  // Reveal Card 01 and fixed UI between 0.24 and 0.30 (centered at rest, normalizedProgress = 0)
-  const cardEntryRatio = Math.min(Math.max((progress - 0.24) / 0.06, 0), 1);
+  // Reveal Card 01 and fixed UI between 0.20 and 0.28 (centered at rest, normalizedProgress = 0)
+  const cardEntryRatio = Math.min(Math.max((progress - 0.20) / 0.08, 0), 1);
   const cardsContainerOpacity = cardEntryRatio;
 
   // Section Exit Kinematics (0.92 to 1.00): Experience unpins and fades out before Projects
@@ -309,7 +330,7 @@ export function Experience() {
       id="experience"
       ref={containerRef}
       className="relative z-20"
-      style={{ height: "420vh" }}
+      style={{ height: "480vh" }}
     >
       {/* Sticky 100vh Viewport Container */}
       <div
@@ -362,7 +383,7 @@ export function Experience() {
 
           {/* Abstract Themes Container tied strictly to cardsContainerOpacity */}
           <div className="absolute inset-0" style={{ opacity: cardsContainerOpacity }}>
-            {/* Veel Abstract Theme: Component Architecture Wireframes */}
+            {/* Aricalot Abstract Theme: Marketplace & Auction Wireframe Contours */}
             <div
               className="absolute inset-0 transition-opacity duration-700 ease-out flex items-center justify-around p-16"
               style={{
@@ -370,17 +391,45 @@ export function Experience() {
               }}
             >
               <div className="w-80 h-96 rounded-2xl border border-cyan-400/30 flex flex-col p-6 gap-4">
-                <div className="h-6 w-32 rounded bg-cyan-400/20" />
-                <div className="h-4 w-full rounded bg-cyan-400/10" />
-                <div className="h-4 w-48 rounded bg-cyan-400/10" />
+                <div className="flex items-center justify-between">
+                  <div className="h-5 w-28 rounded bg-cyan-400/25" />
+                  <div className="h-5 w-16 rounded-full bg-cyan-400/15 border border-cyan-400/20" />
+                </div>
+                <div className="h-36 w-full rounded-xl border border-dashed border-cyan-400/25 bg-cyan-400/5 flex items-center justify-center">
+                  <div className="h-8 w-24 rounded bg-cyan-400/10" />
+                </div>
+                <div className="h-4 w-3/4 rounded bg-cyan-400/15" />
                 <div className="grid grid-cols-2 gap-3 mt-auto">
-                  <div className="h-16 rounded border border-cyan-400/20" />
-                  <div className="h-16 rounded border border-cyan-400/20" />
+                  <div className="h-12 rounded border border-cyan-400/20 bg-cyan-400/10" />
+                  <div className="h-12 rounded border border-cyan-400/25 bg-cyan-400/20" />
                 </div>
               </div>
-              <div className="w-64 h-80 rounded-2xl border border-cyan-400/20 hidden lg:block p-6">
-                <div className="h-4 w-24 rounded bg-cyan-400/20 mb-4" />
-                <div className="h-32 rounded border border-dashed border-cyan-400/20" />
+              <div className="w-64 h-80 rounded-2xl border border-cyan-400/20 hidden lg:flex flex-col p-6 gap-3">
+                <div className="h-4 w-28 rounded bg-cyan-400/20" />
+                <div className="h-20 rounded border border-cyan-400/20 bg-cyan-400/5" />
+                <div className="h-20 rounded border border-cyan-400/20 bg-cyan-400/5" />
+              </div>
+            </div>
+
+            {/* Veel Abstract Theme: Component Architecture Wireframes */}
+            <div
+              className="absolute inset-0 transition-opacity duration-700 ease-out flex items-center justify-around p-16"
+              style={{
+                opacity: Math.max(0, 1 - Math.abs(1 - normalizedProgress) * 1.5) * 0.15,
+              }}
+            >
+              <div className="w-80 h-96 rounded-2xl border border-sky-400/30 flex flex-col p-6 gap-4">
+                <div className="h-6 w-32 rounded bg-sky-400/20" />
+                <div className="h-4 w-full rounded bg-sky-400/10" />
+                <div className="h-4 w-48 rounded bg-sky-400/10" />
+                <div className="grid grid-cols-2 gap-3 mt-auto">
+                  <div className="h-16 rounded border border-sky-400/20" />
+                  <div className="h-16 rounded border border-sky-400/20" />
+                </div>
+              </div>
+              <div className="w-64 h-80 rounded-2xl border border-sky-400/20 hidden lg:block p-6">
+                <div className="h-4 w-24 rounded bg-sky-400/20 mb-4" />
+                <div className="h-32 rounded border border-dashed border-sky-400/20" />
               </div>
             </div>
 
@@ -388,16 +437,16 @@ export function Experience() {
             <div
               className="absolute inset-0 transition-opacity duration-700 ease-out flex items-center justify-center p-12"
               style={{
-                opacity: Math.max(0, 1 - Math.abs(1 - normalizedProgress) * 1.5) * 0.15,
+                opacity: Math.max(0, 1 - Math.abs(2 - normalizedProgress) * 1.5) * 0.15,
               }}
             >
-              <div className="w-full max-w-4xl h-72 border-b border-l border-sky-400/30 flex items-end justify-between px-8 pb-4">
-                <div className="w-8 h-24 rounded-t bg-sky-400/20 border border-sky-400/30" />
-                <div className="w-8 h-44 rounded-t bg-sky-400/30 border border-sky-400/40" />
-                <div className="w-8 h-32 rounded-t bg-sky-400/20 border border-sky-400/30" />
-                <div className="w-8 h-56 rounded-t bg-sky-400/40 border border-sky-400/50" />
-                <div className="w-8 h-40 rounded-t bg-sky-400/20 border border-sky-400/30" />
-                <div className="w-8 h-64 rounded-t bg-sky-400/30 border border-sky-400/40" />
+              <div className="w-full max-w-4xl h-72 border-b border-l border-violet-400/30 flex items-end justify-between px-8 pb-4">
+                <div className="w-8 h-24 rounded-t bg-violet-400/20 border border-violet-400/30" />
+                <div className="w-8 h-44 rounded-t bg-violet-400/30 border border-violet-400/40" />
+                <div className="w-8 h-32 rounded-t bg-violet-400/20 border border-violet-400/30" />
+                <div className="w-8 h-56 rounded-t bg-violet-400/40 border border-violet-400/50" />
+                <div className="w-8 h-40 rounded-t bg-violet-400/20 border border-violet-400/30" />
+                <div className="w-8 h-64 rounded-t bg-violet-400/30 border border-violet-400/40" />
               </div>
             </div>
 
@@ -405,18 +454,18 @@ export function Experience() {
             <div
               className="absolute inset-0 transition-opacity duration-700 ease-out flex items-center justify-around p-12"
               style={{
-                opacity: Math.max(0, 1 - Math.abs(2 - normalizedProgress) * 1.5) * 0.15,
+                opacity: Math.max(0, 1 - Math.abs(3 - normalizedProgress) * 1.5) * 0.15,
               }}
             >
-              <div className="w-72 h-80 rounded-3xl border border-violet-400/30 flex flex-col p-6">
-                <div className="w-full h-36 rounded-xl bg-violet-400/10 border border-violet-400/20 mb-4" />
-                <div className="h-4 w-36 rounded bg-violet-400/20 mb-2" />
-                <div className="h-4 w-20 rounded bg-violet-400/10" />
+              <div className="w-72 h-80 rounded-3xl border border-emerald-400/30 flex flex-col p-6">
+                <div className="w-full h-36 rounded-xl bg-emerald-400/10 border border-emerald-400/20 mb-4" />
+                <div className="h-4 w-36 rounded bg-emerald-400/20 mb-2" />
+                <div className="h-4 w-20 rounded bg-emerald-400/10" />
               </div>
-              <div className="w-72 h-80 rounded-3xl border border-violet-400/20 hidden lg:block p-6">
-                <div className="w-full h-36 rounded-xl bg-violet-400/10 border border-violet-400/20 mb-4" />
-                <div className="h-4 w-32 rounded bg-violet-400/20 mb-2" />
-                <div className="h-4 w-24 rounded bg-violet-400/10" />
+              <div className="w-72 h-80 rounded-3xl border border-emerald-400/20 hidden lg:block p-6">
+                <div className="w-full h-36 rounded-xl bg-emerald-400/10 border border-emerald-400/20 mb-4" />
+                <div className="h-4 w-32 rounded bg-emerald-400/20 mb-2" />
+                <div className="h-4 w-24 rounded bg-emerald-400/10" />
               </div>
             </div>
           </div>
@@ -550,7 +599,7 @@ export function Experience() {
 
           {/* Next Chapter Cue */}
           <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-zinc-500">
-            <span>NEXT: PROJECTS</span>
+            <span>NEXT: PROCESS</span>
             <ArrowRight className="w-3.5 h-3.5 text-zinc-400" />
           </div>
         </footer>

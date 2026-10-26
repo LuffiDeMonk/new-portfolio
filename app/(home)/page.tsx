@@ -4,7 +4,6 @@ import { Hero } from "@/components/portfolio/hero";
 import { About } from "@/components/portfolio/about";
 import { Skills } from "@/components/portfolio/skills";
 import { Experience } from "@/components/portfolio/experience";
-import { Projects } from "@/components/portfolio/projects";
 import { Process } from "@/components/portfolio/process";
 import { CodeShowcase } from "@/components/portfolio/code-showcase";
 import { Metrics } from "@/components/portfolio/metrics";
@@ -20,7 +19,6 @@ export default async function Home() {
       <About />
       <Skills />
       <Experience />
-      <Projects />
       <Process />
       <CodeShowcase />
       <Metrics />

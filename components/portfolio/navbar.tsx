@@ -25,11 +25,10 @@ export const ALL_SECTIONS: NavSection[] = [
   { number: "02", label: "ABOUT", shortLabel: "ABOUT", href: "#about", id: "about", inDesktopNav: true },
   { number: "03", label: "SKILLS", shortLabel: "SKILLS", href: "#skills", id: "skills", inDesktopNav: true },
   { number: "04", label: "EXPERIENCE", shortLabel: "EXP", href: "#experience", id: "experience", inDesktopNav: true },
-  { number: "05", label: "PROJECTS", shortLabel: "PROJ", href: "#projects", id: "projects", inDesktopNav: true },
-  { number: "06", label: "PROCESS", shortLabel: "PROC", href: "#process", id: "process", inDesktopNav: true },
-  { number: "07", label: "CODE", shortLabel: "CODE", href: "#code", id: "code", inDesktopNav: false },
-  { number: "08", label: "METRICS", shortLabel: "METR", href: "#metrics", id: "metrics", inDesktopNav: false },
-  { number: "09", label: "CONTACT", shortLabel: "CONT", href: "#contact", id: "contact", inDesktopNav: true },
+  { number: "05", label: "PROCESS", shortLabel: "PROC", href: "#process", id: "process", inDesktopNav: true },
+  { number: "06", label: "CODE", shortLabel: "CODE", href: "#code", id: "code", inDesktopNav: false },
+  { number: "07", label: "METRICS", shortLabel: "METR", href: "#metrics", id: "metrics", inDesktopNav: false },
+  { number: "08", label: "CONTACT", shortLabel: "CONT", href: "#contact", id: "contact", inDesktopNav: true },
 ];
 
 export function Navbar() {
@@ -137,6 +136,21 @@ export function Navbar() {
     e.preventDefault();
     setIsTabletMenuOpen(false);
     setIsMobileMenuOpen(false);
+
+    if (href === "#experience") {
+      const expEl = document.getElementById("experience");
+      if (expEl) {
+        const rect = expEl.getBoundingClientRect();
+        const containerAbsoluteTop = window.scrollY + rect.top;
+        const totalScroll = expEl.offsetHeight - window.innerHeight;
+        if (totalScroll > 0) {
+          // Progress 0.30 scrolls directly to the first experience card (ARICALOT)
+          const targetScrollY = containerAbsoluteTop + 0.30 * totalScroll;
+          window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+          return;
+        }
+      }
+    }
 
     const targetId = href.replace("#", "");
     const targetEl = document.getElementById(targetId);
