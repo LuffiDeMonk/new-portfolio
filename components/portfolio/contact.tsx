@@ -16,7 +16,7 @@ export function Contact() {
     >
       <div className="max-w-4xl mx-auto text-center w-full my-auto">
         <SectionIntro
-          number="08"
+          number="07"
           label="CONTACT"
           title={["LET'S BUILD", "SOMETHING MEANINGFUL."]}
           description="Have a product, interface, or engineering problem worth solving? I am available for forward-thinking engineering teams and select contract opportunities."

@@ -11,7 +11,7 @@ export function CodeShowcase() {
     >
       <div className="max-w-7xl mx-auto">
         <SectionIntro
-          number="06"
+          number="05"
           label="CODE"
           title={["INSIDE THE", "INTERFACE"]}
           description="I write readable, strictly typed, self-documenting code. Frontend reliability isn't accidental; it stems from rigorous interfaces, runtime validation, and resilient error bounds."

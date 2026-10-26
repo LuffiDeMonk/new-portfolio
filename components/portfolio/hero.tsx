@@ -47,7 +47,7 @@ export function Hero() {
         {/* CTA Buttons & Tech Chips */}
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
-            href="#projects"
+            href="#experience"
             className="px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm tracking-wide hover:bg-cyan-400 hover:shadow-xl hover:shadow-cyan-400/20 transition-all duration-200 flex items-center gap-2"
           >
             <span>Explore My Work</span>

@@ -50,7 +50,7 @@ export function Process() {
     <section id="process" className="relative py-20 sm:py-28 px-6 sm:px-12 lg:px-20 z-10">
       <div className="max-w-7xl mx-auto">
         <SectionIntro
-          number="05"
+          number="04"
           label="PROCESS"
           title="HOW I BUILD"
           description="Transforming ambiguous business challenges into resilient, maintainable, and verifiable frontend code."

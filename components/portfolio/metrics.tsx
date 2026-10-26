@@ -8,7 +8,7 @@ export function Metrics() {
     <section id="metrics" className="relative py-20 sm:py-28 px-6 sm:px-12 lg:px-20 z-10">
       <div className="max-w-7xl mx-auto">
         <SectionIntro
-          number="07"
+          number="06"
           label="METRICS"
           title={["ENGINEERING BY", "THE NUMBERS"]}
           description="Selected metrics and empirical measurements illustrating delivery focus, component reusability, and production consistency."
